@@ -15,7 +15,7 @@ import okhttp3.Response;
 /*
 TODO:封装HTTP请求过程
  */
-public class dongHTTPClient {
+public class DongHTTPClient {
 
     private String result=null;
 

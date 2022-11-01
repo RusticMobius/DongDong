@@ -1,23 +1,24 @@
 package com.example.dongdongapp.service;
 
+import com.example.dongdongapp.config.dongdongappConfiguration;
 import com.example.dongdongapp.model.OpenposeResultModel;
-import com.example.dongdongapp.util.dongHTTPClient;
+import com.example.dongdongapp.util.DongHTTPClient;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class OpenposeService {
-    final String openposeUrl="";//Openpose AI端的url
-    final String backendUrl="";//后端url
+    final String openposeUrl= dongdongappConfiguration.openposeUrl;
+    final String backendUrl=dongdongappConfiguration.backendUrl+"/task";
 
     /**
      * 从AI端获取返回的结果
      * @param uuid 任务的uuid
      * @return
      */
+    @Deprecated
     public OpenposeResultModel getResult(String uuid){
-        dongHTTPClient dongHTTPClient=new dongHTTPClient();
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String resultJsonStr=dongHTTPClient.doGet(openposeUrl+"/v1/result/{"+uuid+"}");
         Gson gson=new Gson();
         OpenposeResultModel openposeResult=new OpenposeResultModel();
@@ -36,5 +37,11 @@ public class OpenposeService {
             e.printStackTrace();
         }
         return openposeResult;
+    }
+
+    public void getAnalyseResult(int videoId){
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
+        String result=dongHTTPClient.doGet(backendUrl+"/analysis/{"+videoId+"}");
+        //TODO:处理结果
     }
 }
