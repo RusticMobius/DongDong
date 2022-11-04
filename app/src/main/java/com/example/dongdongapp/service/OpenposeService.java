@@ -12,7 +12,7 @@ public class OpenposeService {
     final String backendUrl=dongdongappConfiguration.backendUrl+"/task";
 
     /**
-     * 从AI端获取返回的结果
+     * 从AI端获取返回的结果（暂时不要用这个函数先）
      * @param uuid 任务的uuid
      * @return
      */
@@ -39,9 +39,14 @@ public class OpenposeService {
         return openposeResult;
     }
 
-    public void getAnalyseResult(int videoId){
+    /**
+     * 获取分析结果
+     * @param videoId 视频id
+     * @return 后端返回的json格式字符串
+     */
+    public String getAnalyseResult(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doGet(backendUrl+"/analysis/{"+videoId+"}");
-        //TODO:处理结果
+        return result;
     }
 }

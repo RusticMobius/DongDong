@@ -17,8 +17,9 @@ public class VideoService {
      * 上传拍摄的运动视频
      * @param path 视频文件位置
      * @param type 运动类型
+     * @return 后端返回的json格式字符串
      */
-    public void uploadVideo(String path,String type){
+    public String uploadVideo(String path,String type){
         File file=new File(path);
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
@@ -29,5 +30,6 @@ public class VideoService {
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doPost(backendUrl,formBody);
+        return result;
     }
 }

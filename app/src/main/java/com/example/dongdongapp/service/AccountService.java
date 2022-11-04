@@ -13,8 +13,9 @@ public class AccountService {
      * 登录
      * @param userName 用户名
      * @param passWord 密码
+     * @return 后端返回的json格式字符串
      */
-    public void login(String userName,String passWord){
+    public String login(String userName,String passWord){
         FormBody formBody=new FormBody.Builder()
                 .add("username",userName)
                 .add("password",passWord)
@@ -23,15 +24,16 @@ public class AccountService {
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
         String result=dongHTTPClient.doPost(backendBaseUrl+"/login",formBody);
-        //TODO:处理结果
+        return result;
     }
 
     /**
      * 注册
      * @param userName 用户名
      * @param passWord 密码
+     * @return 后端返回的json格式字符串
      */
-    public void register(String userName,String passWord){
+    public String register(String userName,String passWord){
         FormBody formBody=new FormBody.Builder()
                 .add("username",userName)
                 .add("password",passWord)
@@ -40,15 +42,16 @@ public class AccountService {
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
         String result=dongHTTPClient.doPost(backendBaseUrl+"/register",formBody);
-        //TODO:处理结果
+        return result;
     }
 
     /**
      * 修改密码
      * @param userName 用户名
      * @param passWord 新密码
+     * @return 后端返回的json格式字符串
      */
-    public void changePassword(String userName,String passWord){
+    public String changePassword(String userName,String passWord){
         FormBody formBody=new FormBody.Builder()
                 .add("username",userName)
                 .add("password",passWord)
@@ -57,7 +60,7 @@ public class AccountService {
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
         String result=dongHTTPClient.doPost(backendBaseUrl+"/changePassword",formBody);
-        //TODO:处理结果
+        return result;
     }
 
 }
