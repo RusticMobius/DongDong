@@ -18,7 +18,7 @@ TODO:封装HTTP请求过程
  */
 public class DongHTTPClient {
 
-    private String result=null;
+    private String result="";
 
     /**
      * 进行GET请求
@@ -26,6 +26,7 @@ public class DongHTTPClient {
      * @return 返回的响应的body部分（字符串形式）
      */
     public String doGet(String url){
+        this.result="";
         //String result=null;
         new Thread(new Runnable() {
             @Override
@@ -68,6 +69,7 @@ public class DongHTTPClient {
      * @return
      */
     public String doPost(String url,FormBody form){
+        this.result="";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -109,6 +111,7 @@ public class DongHTTPClient {
      * @return
      */
     public String doPost(String url, MultipartBody form){
+        this.result="";
         new Thread(new Runnable() {
             @Override
             public void run() {
