@@ -37,4 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.squareup.okhttp3:okhttp:3.5.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'commons-net:commons-net:3.6'
 }
