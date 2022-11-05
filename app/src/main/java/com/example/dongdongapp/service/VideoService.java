@@ -38,6 +38,11 @@ public class VideoService {
         return result;
     }
 
+    /**
+     * 从FTP服务器下载所有本地没有的视频
+     * @param userParam 用户参数（预留）
+     * @return 是否成功
+     */
     public boolean downloadMyVideos(String userParam){
         boolean isSuccess=false;
         DongFTPClient dongFTPClient=new DongFTPClient(ftpHost,ftpPort);
