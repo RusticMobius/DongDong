@@ -1,10 +1,15 @@
 package com.example.dongdongapp.service;
 
 import com.example.dongdongapp.config.dongdongappConfiguration;
+import com.example.dongdongapp.model.VideoItemModel;
 import com.example.dongdongapp.util.DongFTPClient;
 import com.example.dongdongapp.util.DongHTTPClient;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -22,15 +27,17 @@ public class VideoService {
      * 上传拍摄的运动视频
      * @param fileName 文件名
      * @param type 运动类型
+     * @param uid 用户id
      * @return 后端返回的json格式字符串
      */
-    public String uploadVideo(String fileName,String type){
+    public String uploadVideo(String fileName,String type,int uid){
         File file=new File(localVideoPath+"/"+fileName);
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", file.getName(),requestBody)
                 .addFormDataPart("type",type)
+                .addFormDataPart("uid",uid+"")
                 .build();
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
@@ -49,6 +56,24 @@ public class VideoService {
         dongFTPClient.connectFTPServer();
         isSuccess=dongFTPClient.downloadAllUnExistFile(localVideoPath,ftpVideoPath);
         return isSuccess;
+    }
+
+    /**
+     * 获取用户历史视频列表（TODO:开发中）
+     * @param uid 用户id
+     */
+    @Deprecated
+    public void getVideoList(int uid){
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
+        String res=dongHTTPClient.doGet(backendUrl+"/getVideos/{"+uid+"}");
+        //TODO:应用一个model来处理返回数据（没有就自己造！）
+        Gson gson=new Gson();
+        ArrayList<VideoItemModel> videoList=new ArrayList<>();
+        try {
+            JSONObject jsonObject=new JSONObject(res);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
