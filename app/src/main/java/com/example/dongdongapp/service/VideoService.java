@@ -6,6 +6,7 @@ import com.example.dongdongapp.util.DongFTPClient;
 import com.example.dongdongapp.util.DongHTTPClient;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -59,21 +60,84 @@ public class VideoService {
     }
 
     /**
-     * 获取用户历史视频列表（TODO:开发中）
+     * 获取用户历史视频列表
      * @param uid 用户id
+     * @return 视频列表
      */
-    @Deprecated
-    public void getVideoList(int uid){
+    public ArrayList<VideoItemModel> getVideoList(int uid){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String res=dongHTTPClient.doGet(backendUrl+"/getVideos/{"+uid+"}");
-        //TODO:应用一个model来处理返回数据（没有就自己造！）
         Gson gson=new Gson();
         ArrayList<VideoItemModel> videoList=new ArrayList<>();
         try {
             JSONObject jsonObject=new JSONObject(res);
+            JSONArray jsonArray=(JSONArray) jsonObject.get("data");
+            for (int i=0;i<jsonArray.length();i++){
+                JSONObject object=(JSONObject) jsonArray.get(i);
+                VideoItemModel videoItemModel=new VideoItemModel();
+                videoItemModel.videoId=(int) object.get("videoId");
+                videoItemModel.videoAddress=(String) object.get("videoAddress");
+                videoItemModel.coverAddress=(String) object.get("coverAddress");
+                videoItemModel.createTime=(String) object.get("createTime");
+                videoItemModel.isAnalysis=(String) object.get("isAnalysis");
+                videoItemModel.taskId=(int) object.get("taskId");
+                videoItemModel.type=(String) object.get("type");
+                videoItemModel.uid=(int) object.get("uid");
+                videoItemModel.uuid=(String) object.get("uuid");
+                videoList.add(videoItemModel);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
+        return videoList;
+    }
+
+    /**
+     * 根据视频在ftp服务器上的地址下载视频（视频地址在相应VideoItemModel的videoAddress属性里）
+     * @param videoAddress 视频在ftp服务器上的地址
+     * @return 本地视频名（包括路径，示例：local/video/src/video.mp4）
+     */
+    public String getVideo(String videoAddress){
+        String localVideoSrc="";
+        String fileName=getFileName(videoAddress);
+        DongFTPClient ftpClient=new DongFTPClient();
+        ftpClient.connectFTPServer();
+        ftpClient.downloadFileByName(localVideoPath,videoAddress,fileName);
+        localVideoSrc=localVideoPath+"/"+fileName;
+        return localVideoSrc;
+    }
+
+    /**
+     * 根据缩略图在ftp服务器上的地址下载缩略图（缩略图地址在相应VideoItemModel的coverAddress属性里）
+     * @param coverAddress 缩略图在ftp服务器上的地址
+     * @return 本地缩略图名（包括路径，示例：local/cover/src/cover.jpg）
+     */
+    public String getCover(String coverAddress){
+        String localVideoSrc="";
+        String fileName=getFileName(coverAddress);
+        DongFTPClient ftpClient=new DongFTPClient();
+        ftpClient.connectFTPServer();
+        ftpClient.downloadFileByName(localVideoPath,coverAddress,fileName);
+        localVideoSrc=localVideoPath+"/"+fileName;
+        return localVideoSrc;
+    }
+
+    /**
+     * 将视频列表中的每一个视频项与相应的视频绑定（绑定到video属性上）
+     * @param videoList 视频列表
+     * @return 完成绑定的视频列表
+     */
+    public ArrayList<VideoItemModel> fulfillVideoItemList(ArrayList<VideoItemModel> videoList){
+        for (VideoItemModel videoItemModel:videoList){
+            String videoFileName=getVideo(videoItemModel.videoAddress);
+            videoItemModel.video=new File(videoFileName);
+        }
+        return videoList;
+    }
+
+    private String getFileName(String filePath){
+        String[] params=filePath.split("/");
+        return params[params.length-1];
     }
 
 }

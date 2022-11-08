@@ -84,6 +84,30 @@ public class DongFTPClient {
     }
 
     /**
+     * 从远端FTP服务器下载文件
+     * @param localFilePath 本地文件存储路径
+     * @param remoteFile 远端文件名（包括路径）
+     * @param fileName 文件名（远端和本地使用同一文件名）
+     * @return 是否下载成功
+     */
+    public boolean downloadFileByName(String localFilePath,String remoteFile,String fileName){
+        boolean isSuccess=false;
+        File localFile=new File(localFilePath+"/"+fileName);
+        try{
+            if (!Objects.requireNonNull(localFile.getParentFile()).exists()){//文件夹目录不存在创建目录
+                localFile.getParentFile().mkdirs();
+                localFile.createNewFile();
+            }
+            OutputStream outputStream=new FileOutputStream(localFile);
+            isSuccess=ftpClient.retrieveFile(new String((remoteFile).getBytes(),"ISO-8859-1"),outputStream);
+            outputStream.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return isSuccess;
+    }
+
+    /**
      * 从ftp服务器下载所有本地没有的文件
      * @param localFilePath 本地文件存储路径
      * @param remoteFilePath 远端文件存储路径
@@ -125,4 +149,5 @@ public class DongFTPClient {
         }
         return isSuccess;
     }
+
 }
