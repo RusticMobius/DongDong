@@ -1,7 +1,9 @@
 package com.example.dongdongapp.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dongdongapp.CoursePage;
 import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.model.CourseModel;
@@ -56,6 +59,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 //        Intent i = new Intent(context, VideoPlayer.class);
 //        i.putExtra("url", videoLessionList.get(position).getVideoUrl());
 //        context.startActivity(i);
+        Bundle bundle = new Bundle();
+        bundle.putInt("courseId", item.getId());
+        bundle.putString("courseName",item.getCourseName());
+        bundle.putString("courseTips",item.getTips());
+        Intent intent = new Intent((Activity)context, CoursePage.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+
 
       }
     });

@@ -7,6 +7,7 @@ public class CourseModel {
   private String courseName;
   private String courseDescription;
   private String courseImgUrl;
+  private String tips;
 
   public int getId() {
     return id;
@@ -14,6 +15,10 @@ public class CourseModel {
 
   public int getStatus() {
     return status;
+  }
+
+  public String getTips() {
+    return tips;
   }
 
   public String getCourseName() {
@@ -26,6 +31,10 @@ public class CourseModel {
 
   public String getCourseImgUrl() {
     return courseImgUrl;
+  }
+
+  public void setTips(String tips) {
+    this.tips = tips;
   }
 
   public void setStatus(int status) {

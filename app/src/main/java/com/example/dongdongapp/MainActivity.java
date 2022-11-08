@@ -12,6 +12,7 @@ import com.example.dongdongapp.model.CourseModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton userButton;
@@ -35,12 +36,21 @@ public class MainActivity extends AppCompatActivity {
 
         // fake data
         // TODO read courseList from ...
-        CourseModel fakeCourse = new CourseModel();
+
         for(int i = 0; i < 5; i++){
-          fakeCourse.setCourseName("FAKE COURSE " + i);
+          CourseModel fakeCourse = new CourseModel();
+          fakeCourse.setCourseName("FAKE COURSE " + i );
           fakeCourse.setCourseDescription("a fake course description for frontend test");
           fakeCourse.setStatus(0);
           courseList.add(fakeCourse);
+          Random random = new Random();
+          int tipsNum = 1 + random.nextInt(7);
+          String tips = "";
+          for(int j = 0; j < tipsNum; j++ ){
+            tips += "Tips" + (j+1) + ": this is a tips for course" + i + "阿斯顿法国红酒快乐；\n\n\n";
+          }
+          fakeCourse.setTips(tips);
+
 
         }
 
