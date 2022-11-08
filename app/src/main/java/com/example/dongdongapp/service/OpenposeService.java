@@ -46,7 +46,20 @@ public class OpenposeService {
      */
     public String getAnalyseResult(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
+        String result=dongHTTPClient.doGet(backendUrl+"/get/{"+videoId+"}");
+        return result;
+    }
+
+    /**
+     * 对视频进行分析
+     * @param videoId 视频id
+     * @return 是否成功以及相应信息
+     */
+    public String analyseVideo(int videoId){
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doGet(backendUrl+"/analysis/{"+videoId+"}");
         return result;
     }
+
+
 }
