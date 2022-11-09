@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+  id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -26,7 +27,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
+  viewBinding {
+    enabled = true
+  }
+
 }
+
 
 dependencies {
     implementation 'commons-net:commons-net:3.6'
@@ -41,4 +49,17 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // CameraX core library using the camera2 implementation
+
+    def camerax_version = "1.1.0-beta01"
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    implementation "androidx.camera:camera-video:${camerax_version}"
+
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+
 }

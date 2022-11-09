@@ -2,11 +2,11 @@ package com.example.dongdongapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,6 +17,7 @@ public class CoursePage extends AppCompatActivity {
     private String allTips;
     private String courseName;
     private ImageButton retButton;
+    private Button recordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class CoursePage extends AppCompatActivity {
         setContentView(R.layout.activity_course_page);
 
         retButton = findViewById(R.id.retButton);
+        recordButton = findViewById(R.id.recordButton);
 
         courseNameView = findViewById(R.id.courseNameText);
         tipsView = findViewById(R.id.tipsText);
@@ -43,5 +45,16 @@ public class CoursePage extends AppCompatActivity {
             CoursePage.this.startActivity(intent);
           }
         });
+
+        recordButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Intent intent = new Intent(CoursePage.this, VideoRecordPage.class);
+            startActivityForResult(intent,1);
+
+          }
+        });
+
+
     }
 }
