@@ -47,6 +47,27 @@ public class VideoService {
     }
 
     /**
+     * 上传拍摄的运动视频
+     * @param file 视频文件
+     * @param type 运动类型
+     * @param uid 用户id
+     * @return 后端返回的json格式字符串
+     */
+    public String uploadVideo(File file,String type,int uid){
+        RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
+        MultipartBody formBody=new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", file.getName(),requestBody)
+                .addFormDataPart("type",type)
+                .addFormDataPart("uid",uid+"")
+                .build();
+
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
+        String result=dongHTTPClient.doPost(backendUrl,formBody);
+        return result;
+    }
+
+    /**
      * 从FTP服务器下载所有本地没有的视频
      * @param userParam 用户参数（预留）
      * @return 是否成功
