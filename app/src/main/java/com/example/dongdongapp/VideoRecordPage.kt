@@ -36,7 +36,7 @@ import androidx.core.content.PermissionChecker
 import com.example.dongdongapp.databinding.ActivityVideoRecordPageBinding
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 typealias LumaListener = (luma: Double) -> Unit
 
@@ -65,7 +65,34 @@ class VideoRecordPage : AppCompatActivity() {
 
       // Set up the listeners for take photo and video capture buttons
       // viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
-      viewBinding.recordButton.setOnClickListener{ captureVideo() }
+      viewBinding.recordButton.setOnClickListener {
+        if (recording == null) {
+          var t: Long = 5 * 1000 //定义总时长 5s
+          viewBinding.recordButton.setImageResource(R.drawable.ic_outline_circle_48)
+          viewBinding.countDownTime.visibility = View.VISIBLE
+          var countDownTimer = object : CountDownTimer(t, 1000) {
+            override fun onFinish() {
+              viewBinding.countDownTime.visibility = View.INVISIBLE
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+
+              var second = millisUntilFinished / 1000 % 60 + 1
+              viewBinding.countDownTime.text = second.toString()
+            }
+          }.start()
+
+          Timer().schedule(object : TimerTask() {
+            override fun run() {
+              captureVideo()
+
+            }
+          }, 5000)
+        }else{
+          captureVideo()
+        }
+
+      }
       viewBinding.retButton.setOnClickListener { retToParentPage() }
       viewBinding.commitButton.setOnClickListener { uploadVideo() }
       cameraExecutor = Executors.newSingleThreadExecutor()
