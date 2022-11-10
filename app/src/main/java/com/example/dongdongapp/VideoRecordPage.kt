@@ -26,9 +26,7 @@ import androidx.camera.core.CameraSelector
 import android.util.Log
 import android.view.View
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
-import androidx.camera.video.FallbackStrategy
 import androidx.camera.video.MediaStoreOutputOptions
 import androidx.camera.video.Quality
 import androidx.camera.video.QualitySelector
