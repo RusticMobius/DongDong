@@ -42,13 +42,13 @@
     android:layout_marginBottom="64dp"
     android:background="@color/white"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/commitButton"
+    app:layout_constraintEnd_toStartOf="@+id/reverseButton"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/retButton"
-    app:srcCompat="@drawable/ic_baseline_stop_circle_48" />
+    app:srcCompat="@drawable/ic_baseline_play_circle_48" />
 
   <ImageButton
-    android:id="@+id/commitButton"
+    android:id="@+id/reverseButton"
     android:layout_width="64dp"
     android:layout_height="64dp"
     android:background="@color/white"
@@ -56,7 +56,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/recordButton"
-    app:srcCompat="@drawable/ic_baseline_check_48" />
+    app:srcCompat="@drawable/ic_baseline_cameraswitch_48" />
 
   <TextView
     android:visibility="invisible"
@@ -64,7 +64,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="5"
-    android:textColor="#FFA31F"
+    android:textColor="#50D77C"
     android:textSize="24dp"
     android:layout_marginBottom="16dp"
     android:layout_marginStart="25dp"

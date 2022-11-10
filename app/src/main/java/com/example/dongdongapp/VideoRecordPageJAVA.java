@@ -55,7 +55,7 @@ public class VideoRecordPageJAVA extends AppCompatActivity implements ImageAnaly
     previewView = findViewById(R.id.previewView);
     retButton = findViewById(R.id.retButton);
     recordButton = findViewById(R.id.recordButton);
-    commitButton = findViewById(R.id.commitButton);
+    commitButton = findViewById(R.id.reverseButton);
     initButton();
 
     listenableFuture = ProcessCameraProvider.getInstance(this);
@@ -127,7 +127,7 @@ public class VideoRecordPageJAVA extends AppCompatActivity implements ImageAnaly
         } else {
           isRecording = false;
           stopRecorder();
-          recordButton.setImageResource(R.drawable.ic_baseline_stop_circle_48);
+          recordButton.setImageResource(R.drawable.ic_baseline_play_circle_48);
         }
       }
     });
@@ -186,7 +186,6 @@ public class VideoRecordPageJAVA extends AppCompatActivity implements ImageAnaly
 
     }
   }
-
 
 
   @SuppressLint("RestrictedApi")

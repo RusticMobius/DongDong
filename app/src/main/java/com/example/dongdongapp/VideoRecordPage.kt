@@ -6,6 +6,7 @@ import android.Manifest
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.Handler
@@ -50,6 +51,10 @@ class VideoRecordPage : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
 
+    private var videoUri: Uri? = null
+
+    private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityVideoRecordPageBinding.inflate(layoutInflater)
@@ -73,6 +78,7 @@ class VideoRecordPage : AppCompatActivity() {
           var countDownTimer = object : CountDownTimer(t, 1000) {
             override fun onFinish() {
               viewBinding.countDownTime.visibility = View.INVISIBLE
+              viewBinding.recordButton.setImageResource(R.drawable.ic_baseline_pause_circle_outline_48)
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -94,7 +100,7 @@ class VideoRecordPage : AppCompatActivity() {
 
       }
       viewBinding.retButton.setOnClickListener { retToParentPage() }
-      viewBinding.commitButton.setOnClickListener { uploadVideo() }
+      viewBinding.reverseButton.setOnClickListener { selectCamera() }
       cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
@@ -104,8 +110,19 @@ class VideoRecordPage : AppCompatActivity() {
     finish()
   }
 
-  private fun uploadVideo(){
+  private fun selectCamera(){
     // TODO
+    cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+      CameraSelector.DEFAULT_FRONT_CAMERA
+    } else {
+      CameraSelector.DEFAULT_BACK_CAMERA
+    }
+    if (allPermissionsGranted()) {
+      startCamera()
+    } else {
+      ActivityCompat.requestPermissions(
+        this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+    }
   }
 
   // Implements VideoCapture use case, including start and stop capturing.
@@ -129,6 +146,7 @@ class VideoRecordPage : AppCompatActivity() {
 
 
     // create and start a new recording session
+    //
     val name = SimpleDateFormat(FILENAME_FORMAT, Locale.CHINESE)
       .format(System.currentTimeMillis())
     val contentValues = ContentValues().apply {
@@ -175,6 +193,13 @@ class VideoRecordPage : AppCompatActivity() {
               Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT)
                 .show()
               Log.d(TAG, msg)
+
+              // TODO GOTO PREVIEW
+              videoUri = recordEvent.outputResults.outputUri
+              val intent = Intent(this,VideoPlayer::class.java)
+              intent.data = videoUri
+              startActivityForResult(intent,1)
+
             } else {
               recording?.close()
               recording = null
@@ -182,7 +207,7 @@ class VideoRecordPage : AppCompatActivity() {
                 "${recordEvent.error}")
             }
             viewBinding.recordButton.apply {
-              setImageResource(R.drawable.ic_baseline_stop_circle_48)
+              setImageResource(R.drawable.ic_baseline_play_circle_48)
               isEnabled = true
             }
           }
@@ -220,7 +245,7 @@ class VideoRecordPage : AppCompatActivity() {
       videoCapture = VideoCapture.withOutput(recorder)
 
       // Select back camera as a default
-      val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+      // val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
       try {
         // Unbind use cases before rebinding
