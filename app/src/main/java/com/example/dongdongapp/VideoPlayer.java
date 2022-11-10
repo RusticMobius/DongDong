@@ -66,10 +66,10 @@ public class VideoPlayer extends AppCompatActivity {
       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-          int duration = mediaPlayer.getDuration(); //total time
+          // int duration = mediaPlayer.getDuration(); //total time
           int position = mediaPlayer.getCurrentPosition();  //start time
           currentTime.setText(calculateTime(position / 1000));
-          totalTime.setText(calculateTime(duration / 1000));
+          // totalTime.setText(calculateTime(duration / 1000));
           startTimer();
         }
 

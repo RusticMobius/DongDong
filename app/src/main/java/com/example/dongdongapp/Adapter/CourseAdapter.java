@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dongdongapp.CoursePage;
+import com.example.dongdongapp.CourseRecordPage;
 import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.model.CourseModel;
@@ -29,9 +30,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
   private List<CourseModel> CourseList;
   private Context context;
+  private int userId;
 
-  public CourseAdapter(Context context){
+  public CourseAdapter(Context context, int userId){
     this.context = context;
+    this.userId = userId;
   }
   @NonNull
   @Override
@@ -61,9 +64,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 //        context.startActivity(i);
         Bundle bundle = new Bundle();
         bundle.putInt("courseId", item.getId());
+        bundle.putInt("userId", userId);
         bundle.putString("courseName",item.getCourseName());
         bundle.putString("courseTips",item.getTips());
-        Intent intent = new Intent((Activity)context, CoursePage.class);
+        Intent intent = new Intent((Activity)context, CourseRecordPage.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
 

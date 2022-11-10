@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView courseRecyclerView;
     private List<CourseModel> courseList;
     private CourseAdapter courseAdapter;
+    private boolean isLogged;
+    // TODO ABOUT USERID
+    private int userId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         courseRecyclerView = findViewById(R.id.courseRecyclerView);
         courseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        courseAdapter = new CourseAdapter(this);
+        courseAdapter = new CourseAdapter(this, userId);
 
         courseList = new ArrayList<>();
 
@@ -57,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
         courseAdapter.setCourseList(courseList);
         courseRecyclerView.setAdapter(courseAdapter);
 
+        //TODO CONTROL LOG LOGICAL
 
+    }
 
-
+    public int getUserId(){
+      return userId;
     }
 }
