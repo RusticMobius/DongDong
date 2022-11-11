@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/recycler_view_border_purple">
 
   <ImageButton
     android:id="@+id/userButton"
@@ -12,7 +13,7 @@
     android:layout_height="54dp"
     android:layout_marginTop="24dp"
     android:layout_marginEnd="24dp"
-    android:background="@color/white"
+    android:background="@color/none_select_state"
     android:src="@drawable/ic_baseline_person_32"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +24,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="36dp"
     android:layout_marginTop="56dp"
-
+    android:textColor="@color/white"
     android:fontFamily="@font/nunito_bold"
     android:text="Welcome!"
     android:textSize="56dp"
@@ -39,6 +40,7 @@
     android:fontFamily="@font/nunito_semibold"
     android:text="Choose a course \n and begin to exercise !"
     android:textSize="24dp"
+    android:textColor="@color/white"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
@@ -56,19 +58,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/guideText" />
 
-  <ImageView
-    android:id="@+id/divider"
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="#673AB7"
-    tools:layout_editor_absoluteX="53dp"
-    tools:layout_editor_absoluteY="228dp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/guideText"
-    android:layout_marginStart="36dp"
-    android:layout_marginEnd="36dp"
-    android:layout_marginTop="16dp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

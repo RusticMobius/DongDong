@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.RecordFragment">
+    tools:context=".fragment.RecordFragment"
+    android:background="@drawable/recycler_view_border_blue">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -67,8 +68,8 @@
       app:layout_constraintTop_toTopOf="parent"
       android:layout_marginStart="20dp"
       android:layout_marginTop="16dp"
-      android:background="@color/white"
-      app:srcCompat="@drawable/ic_baseline_arrow_back_32" />
+      android:background="@color/none_select_state"
+      app:srcCompat="@drawable/ic_baseline_arrow_back_32_blue" />
 
 
 
