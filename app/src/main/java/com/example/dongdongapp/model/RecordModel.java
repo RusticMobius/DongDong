@@ -16,6 +16,8 @@ public class RecordModel implements Comparable<RecordModel> {
   private int courseId;
   private int userId;
 
+  private final String[] rankTable={"C","C","B","A","A+","A+"};
+
   public int getRecordId() {
     return recordId;
   }
@@ -70,6 +72,26 @@ public class RecordModel implements Comparable<RecordModel> {
       return -1;
     }else{
       return 0;
+    }
+  }
+
+  /**
+   * 根据得分生成等级
+   * @param score 得分
+   */
+  public void setRank(int score){
+    if(score>=1&&score<=5){
+      this.recordRank=this.rankTable[score-1];
+    }
+  }
+
+  /**
+   * 根据得分生成等级
+   * @param score 得分
+   */
+  public void setRank(double score){
+    if(score>=1&&score<=5){
+      this.recordRank=this.rankTable[(int) (Math.round(score)-1)];
     }
   }
 }
