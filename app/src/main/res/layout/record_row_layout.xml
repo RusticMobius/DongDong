@@ -18,54 +18,57 @@
 
 
     <ImageView
-      android:id="@+id/courseImg"
+      android:id="@+id/recordImg"
       android:layout_width="128dp"
       android:layout_height="96dp"
-      android:layout_marginEnd="16dp"
+      android:layout_marginEnd="0dp"
       android:foregroundGravity="right"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/course0" />
+      app:srcCompat="@drawable/analyze" />
 
     <TextView
-      android:id="@+id/courseNameText"
+      android:id="@+id/recordRank"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:layout_marginTop="-4dp"
+      android:text="A"
+      android:fontFamily="@font/nunito_bold"
+      android:textColor="@color/teal_200"
+      android:textSize="32dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/recordDateText"
       android:layout_width="wrap_content"
       android:layout_height="30dp"
-      android:layout_marginStart="4dp"
-      android:layout_marginTop="4dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
       android:fontFamily="@font/nunito_bold"
-      android:text="CourseName"
+      android:text="in 2022.10.28 "
       android:textSize="20dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
+      app:layout_constraintStart_toEndOf="@id/recordRank"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/courseDescriptionText"
+      android:id="@+id/recordAdvice"
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_marginStart="4dp"
       android:layout_marginTop="8dp"
+      android:layout_marginEnd="24dp"
       android:fontFamily="@font/nunito_semibold"
-      android:text="Course Description balabalaba"
+      android:text="The Best advice is no advice, Don't you think so?"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/courseImg"
+      app:layout_constraintEnd_toStartOf="@+id/recordImg"
       app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/courseNameText"
+      app:layout_constraintTop_toBottomOf="@+id/recordDateText"
       app:layout_constraintVertical_bias="0" />
 
-    <ImageButton
-      android:id="@+id/collectButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:layout_marginEnd="0dp"
-      android:background="#00FFFFFF"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_baseline_star_border_24" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
