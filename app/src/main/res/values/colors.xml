@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="select_state">#C3C3C3</color>
+    <color name="none_select_state">#00FFFFFF</color>
+    <color name="rank_ace">#25E4B8</color>
+    <color name="rank_average">#A363DC</color>
+    <color name="rank_below">#FFEB3B</color>
 </resources>
