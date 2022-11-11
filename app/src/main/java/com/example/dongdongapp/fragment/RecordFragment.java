@@ -1,5 +1,6 @@
 package com.example.dongdongapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.dongdongapp.Adapter.RecordAdapter;
+import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.model.RecordModel;
 
@@ -44,6 +47,7 @@ public class RecordFragment extends Fragment {
     private String courseName;
 
     private TextView guideText;
+    private ImageButton retButton;
 
 
     public RecordFragment() {
@@ -92,13 +96,25 @@ public class RecordFragment extends Fragment {
 
         guideText = view.findViewById(R.id.recordGuideLine);
         recordRecyclerView = view.findViewById(R.id.recordRecyclerView);
+        retButton = view.findViewById(R.id.retButton);
 
         recordRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recordRecyclerView.setAdapter(recordAdapter);
 
         guideText.setText("In " + courseName +"\n" + "You have done so much");
-
+        initButtonListener();
         return view;
+    }
+
+    private void initButtonListener(){
+      retButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          // TODO
+          Intent intent = new Intent(getActivity(), MainActivity.class);
+          startActivity(intent);
+        }
+      });
     }
 
 
