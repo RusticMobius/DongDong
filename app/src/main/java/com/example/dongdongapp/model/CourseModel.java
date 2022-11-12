@@ -8,6 +8,13 @@ public class CourseModel {
   private String courseDescription; // 描述一下对仰卧起坐的动作分析能干什么
   private String courseImgUrl;  // 忽略，可以前端指定
   private String tips;  // 描述仰卧起坐的动作建议
+  private final String[] exerciseTypeTable= {
+          "VIDEO_ HIGHKNEES","VIDEO_ CRUNCH", "VIDEO_ STANDINGLONGJUMP",
+          "VIDEO_ MULTIJUMP","VIDEO_ SITANDREACH","VIDEO_ RUNBACKANDFORTH",
+          "VIDEO_ TENNISTHROW","VIDEO_ BALANCEBEAM","VIDEO_ SINGLELEGSTAND",
+          "VIDEO_ PLANK","VIDEO_ SQUAT"
+  };//注意课程id和运动类型的对应关系！举例：id=2则运动类型为exerciseTypeTable[2]，即"VIDEO_ STANDINGLONGJUMP"
+  //TODO:如果需要对应的中文表单的话可自行编写或联系我（191250100陆健成）
 
 
 
@@ -36,6 +43,10 @@ public class CourseModel {
 
   public String getCourseImgUrl() {
     return courseImgUrl;
+  }
+
+  public String getExerciseType(){
+    return exerciseTypeTable[id];
   }
 
   public void setTips(String tips) {
