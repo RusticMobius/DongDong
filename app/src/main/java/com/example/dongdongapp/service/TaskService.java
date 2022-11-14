@@ -3,6 +3,7 @@ package com.example.dongdongapp.service;
 import com.example.dongdongapp.config.dongdongappConfiguration;
 import com.example.dongdongapp.model.AnalyseResultModel;
 import com.example.dongdongapp.model.OpenposeResultModel;
+import com.example.dongdongapp.model.RecordModel;
 import com.example.dongdongapp.util.DongHTTPClient;
 import com.google.gson.Gson;
 
@@ -91,6 +92,18 @@ public class TaskService {
             e.printStackTrace();
         }
         return success;
+    }
+
+    /**
+     * 将分析结果转为Record
+     * @param resultModel 分析结果模型
+     * @return Record模型
+     */
+    public RecordModel parseRecordModel(AnalyseResultModel resultModel){
+        RecordModel recordModel=new RecordModel();
+        recordModel.setRecordId(resultModel.taskId);
+        recordModel.setRecordAdvice(resultModel.advice);
+        return recordModel;
     }
 
 
