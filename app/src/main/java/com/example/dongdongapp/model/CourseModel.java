@@ -9,10 +9,17 @@ public class CourseModel {
   private String courseImgUrl;  // 忽略，可以前端指定
   private String tips;  // 描述仰卧起坐的动作建议
   private final String[] exerciseTypeTable= {
-          "VIDEO_ HIGHKNEES","VIDEO_ CRUNCH", "VIDEO_ STANDINGLONGJUMP",
-          "VIDEO_ MULTIJUMP","VIDEO_ SITANDREACH","VIDEO_ RUNBACKANDFORTH",
-          "VIDEO_ TENNISTHROW","VIDEO_ BALANCEBEAM","VIDEO_ SINGLELEGSTAND",
-          "VIDEO_ PLANK","VIDEO_ SQUAT"
+          "VIDEO_HIGHKNEES", //0
+          "VIDEO_CRUNCH",  //1
+          "VIDEO_STANDINGLONGJUMP", //2
+          "VIDEO_MULTIJUMP", //3
+          "VIDEO_SITANDREACH", //4
+          "VIDEO_RUNBACKANDFORTH", //5
+          "VIDEO_TENNISTHROW", //6
+          "VIDEO_BALANCEBEAM", //7
+          "VIDEO_SINGLELEGSTAND", //8
+          "VIDEO_PLANK", //9
+          "VIDEO_SQUAT" //10
   };//注意课程id和运动类型的对应关系！举例：id=2则运动类型为exerciseTypeTable[2]，即"VIDEO_ STANDINGLONGJUMP"
   //TODO:如果需要对应的中文表单的话可自行编写或联系我（191250100陆健成）
 
@@ -71,5 +78,16 @@ public class CourseModel {
 
   public void setCourseImgUrl(String courseImgUrl) {
     this.courseImgUrl = courseImgUrl;
+  }
+
+  public int getTypeId(String type){
+    int index=-1;
+    for (int i = 0; i < exerciseTypeTable.length; i++) {
+      if(exerciseTypeTable[i].equals(type)){
+        index=i;
+        break;
+      }
+    }
+    return index;
   }
 }
