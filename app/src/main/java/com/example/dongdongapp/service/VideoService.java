@@ -146,6 +146,33 @@ public class VideoService {
     }
 
     /**
+     * 根据VideoId获取视频对象
+     * @param videoId 视频id
+     * @return 视频对象（参考VideoItemModel或后端文档）
+     */
+    public VideoItemModel getVideoById(int videoId){
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
+        String res=dongHTTPClient.doGet(backendUrl+"/getVideo/{"+videoId+"}");
+        VideoItemModel videoItemModel=new VideoItemModel();
+        try {
+            JSONObject object=new JSONObject(res);
+            videoItemModel.videoId=(int) object.get("videoId");
+            videoItemModel.videoAddress=(String) object.get("videoAddress");
+            videoItemModel.coverAddress=(String) object.get("coverAddress");
+            videoItemModel.createTime=(String) object.get("createTime");
+            videoItemModel.isAnalysis=(String) object.get("isAnalysis");
+            videoItemModel.taskId=(int) object.get("taskId");
+            videoItemModel.type=(String) object.get("type");
+            videoItemModel.uid=(int) object.get("uid");
+            videoItemModel.uuid=(String) object.get("uuid");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        videoItemModel.video=new File(getVideo(videoItemModel.videoAddress));
+        return videoItemModel;
+    }
+
+    /**
      * 根据视频在ftp服务器上的地址下载视频（视频地址在相应VideoItemModel的videoAddress属性里）
      * @param videoAddress 视频在ftp服务器上的地址
      * @return 本地视频名（包括路径，示例：local/video/src/video.mp4）
