@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         courseAdapter = new CourseAdapter(this, userId);
 
         courseList = new ArrayList<>();
-        userId = getSharedPreferences("loginInfo",Context.MODE_PRIVATE).getInt("userId",userId);
+        // userId = getSharedPreferences("loginInfo",Context.MODE_PRIVATE).getInt("userId",userId);
 
 
       // fake data

@@ -2,10 +2,12 @@ package com.example.dongdongapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,12 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             toast.show();
           } else {
             // loginThread(userName,password);
-            int userId = 0;
-            userNameSp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
-            spEditor = userNameSp.edit();
-            spEditor.putInt("userId",userId);
-            spEditor.apply();
-
+            loginThread(userName,password);
           }
         }
       });
@@ -106,14 +103,60 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // TODO
-    private String loginThread(String userName, String password){
+
+    private void loginThread(String userName, String password){
       new Thread(new Runnable() {
         @Override
         public void run() {
-          accountService.login(userName,password);
+          int userId = accountService.login(userName,password);
+          Log.d("loginTest", String.valueOf(userId));
         }
-      });
-      return null;
+      }).start();
     }
+//    private void loginThread(String userName, String password){
+//      new Thread(new Runnable() {
+//        @Override
+//        public void run() {
+//          int userId = 0;
+//          Log.d("login", String.valueOf(userId));
+//          userId = accountService.login(userName,password);
+//          Log.d("login", String.valueOf(userId));
+//          runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//              View toastView;
+//              TextView msgText;
+//              LayoutInflater inflater = LayoutInflater.from(context);
+//              Toast toast = new Toast(context);
+//              toast.setDuration(Toast.LENGTH_SHORT);
+//
+//              if (userId != 0){
+//                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+//                msgText = toastView.findViewById(R.id.toastMsg);
+//                msgText.setText("login succeed！");
+//                userNameSp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+//                spEditor = userNameSp.edit();
+//                spEditor.putInt("userId",userId);
+//                spEditor.apply();
+//                toast.setView(toastView);
+//                toast.show();
+//
+//                Intent intent = new Intent(context, MainActivity.class);
+//                startActivity(intent);
+//
+//              } else {
+//                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+//                msgText = toastView.findViewById(R.id.toastMsg);
+//                msgText.setText("login failed!");
+//                toast.setView(toastView);
+//                toast.show();
+//              }
+//
+//            }
+//          });
+//        }
+//      }).start();
+//
+//    }
 
 }
