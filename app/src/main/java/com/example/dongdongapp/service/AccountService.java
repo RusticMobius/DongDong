@@ -43,22 +43,19 @@ public class AccountService {
      * 登录
      * @param userName 用户名
      * @param passWord 密码
-     * @return 是否登录成功
+     * @return 用户id,若登录失败返回0或-1
      */
-    public boolean login(String userName,String passWord){
+    public int login(String userName,String passWord){
         String resultStr=getLoginResult(userName,passWord);
-        boolean result=false;
+        int userId=-1;
         try{
             JSONObject jsonObject=new JSONObject(resultStr);
-            int status=(int) jsonObject.get("status");
-            if(status==1){
-                result=true;
-            }
+            userId=(int) jsonObject.get("data");
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return result;
+        return userId;
     }
 
     /**
@@ -90,22 +87,19 @@ public class AccountService {
      * 注册
      * @param userName 用户名
      * @param passWord 密码
-     * @return 注册是否成功
+     * @return 用户id,若登录失败返回0或-1
      */
-    public boolean register(String userName,String passWord){
+    public int register(String userName,String passWord){
         String resultStr=getLoginResult(userName,passWord);
-        boolean result=false;
+        int userId=-1;
         try{
             JSONObject jsonObject=new JSONObject(resultStr);
-            int status=(int) jsonObject.get("status");
-            if(status==1){
-                result=true;
-            }
+            userId=(int) jsonObject.get("data");
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return result;
+        return userId;
     }
 
     /**
