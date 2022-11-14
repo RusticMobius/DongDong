@@ -61,25 +61,28 @@ public class LoginActivity extends AppCompatActivity {
           View toastView;
           TextView msgText;
 
+          // TODO test Thread
+          loginThread(userName,password);
 
-          if (userName.length() == 0){
-            msg = "Please enter your username";
-            toastView = getLayoutInflater().inflate(R.layout.info_toast_layout, null);
-            msgText = toastView.findViewById(R.id.toastMsg);
-            msgText.setText(msg);
-            toast.setView(toastView);
-            toast.show();
-          } else if(password.length() == 0){
-            msg = "Please enter your password";
-            toastView = getLayoutInflater().inflate(R.layout.info_toast_layout, null);
-            msgText = toastView.findViewById(R.id.toastMsg);
-            msgText.setText(msg);
-            toast.setView(toastView);
-            toast.show();
-          } else {
-            // loginThread(userName,password);
-            loginThread(userName,password);
-          }
+
+//          if (userName.length() == 0){
+//            msg = "Please enter your username";
+//            toastView = getLayoutInflater().inflate(R.layout.info_toast_layout, null);
+//            msgText = toastView.findViewById(R.id.toastMsg);
+//            msgText.setText(msg);
+//            toast.setView(toastView);
+//            toast.show();
+//          } else if(password.length() == 0){
+//            msg = "Please enter your password";
+//            toastView = getLayoutInflater().inflate(R.layout.info_toast_layout, null);
+//            msgText = toastView.findViewById(R.id.toastMsg);
+//            msgText.setText(msg);
+//            toast.setView(toastView);
+//            toast.show();
+//          } else {
+//            // loginThread(userName,password);
+//            loginThread(userName,password);
+//          }
         }
       });
     }
@@ -108,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
       new Thread(new Runnable() {
         @Override
         public void run() {
+          Log.d("loginTest","Thread running");
           int userId = accountService.login(userName,password);
           Log.d("loginTest", String.valueOf(userId));
         }
