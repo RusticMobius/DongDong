@@ -12,4 +12,6 @@
     <color name="rank_ace">#25E4B8</color>
     <color name="rank_average">#A363DC</color>
     <color name="rank_below">#FFEB3B</color>
+    <color name="error_color">#FF685D</color>
+    <color name="warning_color">#FFA41F</color>
 </resources>

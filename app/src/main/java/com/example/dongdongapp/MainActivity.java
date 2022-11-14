@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -20,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private List<CourseModel> courseList;
     private CourseAdapter courseAdapter;
     private boolean isLogged;
-    // TODO ABOUT USERID
-    private int userId = 0;
+
+    // TODO ABOUT USERID sharedPreference
+    private int userId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         courseAdapter = new CourseAdapter(this, userId);
 
         courseList = new ArrayList<>();
+        userId = getSharedPreferences("loginInfo",Context.MODE_PRIVATE).getInt("userId",userId);
 
-        // fake data
+
+      // fake data
         // TODO read courseList from ...
 
         for(int i = 0; i < 5; i++){
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
           int tipsNum = 1 + random.nextInt(7);
           String tips = "";
           for(int j = 0; j < tipsNum; j++ ){
-            tips += "Tips" + (j+1) + ": this is a tips for course" + i + "阿斯顿法国红酒快乐；\n\n\n";
+            tips += "Tips" + (j+1) + ": this is a tips for course" + i + "\n\n\n";
           }
           fakeCourse.setTips(tips);
 
@@ -59,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
         courseAdapter.setCourseList(courseList);
         courseRecyclerView.setAdapter(courseAdapter);
+
+        if (userId == -1){
+          Intent intent = new Intent(this, LoginActivity.class);
+          this.startActivity(intent);
+        }
+
 
         //TODO CONTROL LOG LOGICAL
 
