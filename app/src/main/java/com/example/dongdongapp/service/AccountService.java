@@ -2,6 +2,7 @@ package com.example.dongdongapp.service;
 
 import com.example.dongdongapp.config.dongdongappConfiguration;
 import com.example.dongdongapp.util.DongHTTPClient;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ public class AccountService {
      * @param passWord 密码
      * @return 后端返回的json格式字符串
      */
-    public String login(String userName,String passWord){
+    public String getLoginResult(String userName,String passWord){
         JSONObject jsonObject=new JSONObject();
         try {
             jsonObject.put("username",userName);
@@ -39,12 +40,34 @@ public class AccountService {
     }
 
     /**
+     * 登录
+     * @param userName 用户名
+     * @param passWord 密码
+     * @return 是否登录成功
+     */
+    public boolean login(String userName,String passWord){
+        String resultStr=getLoginResult(userName,passWord);
+        boolean result=false;
+        try{
+            JSONObject jsonObject=new JSONObject(resultStr);
+            int status=(int) jsonObject.get("status");
+            if(status==1){
+                result=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
      * 注册
      * @param userName 用户名
      * @param passWord 密码
      * @return 后端返回的json格式字符串
      */
-    public String register(String userName,String passWord){
+    public String getRegisterResult(String userName,String passWord){
         JSONObject jsonObject=new JSONObject();
         try {
             jsonObject.put("username",userName);
@@ -60,6 +83,28 @@ public class AccountService {
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
         String result=dongHTTPClient.doPost(backendBaseUrl+"/register",body);
+        return result;
+    }
+
+    /**
+     * 注册
+     * @param userName 用户名
+     * @param passWord 密码
+     * @return 注册是否成功
+     */
+    public boolean register(String userName,String passWord){
+        String resultStr=getLoginResult(userName,passWord);
+        boolean result=false;
+        try{
+            JSONObject jsonObject=new JSONObject(resultStr);
+            int status=(int) jsonObject.get("status");
+            if(status==1){
+                result=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return result;
     }
 

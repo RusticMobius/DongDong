@@ -29,9 +29,9 @@ public class VideoService {
      * @param fileName 文件名
      * @param type 运动类型
      * @param uid 用户id
-     * @return 后端返回的json格式字符串
+     * @return 视频信息（详见VideoItemModel或参考后端接口文档）
      */
-    public String uploadVideo(String fileName,String type,int uid){
+    public VideoItemModel uploadVideo(String fileName,String type,int uid){
         File file=new File(localVideoPath+"/"+fileName);
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
@@ -43,7 +43,23 @@ public class VideoService {
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doPost(backendUrl,formBody);
-        return result;
+        VideoItemModel videoItemModel=new VideoItemModel();
+        videoItemModel.video=file;
+        try {
+            JSONObject object=new JSONObject(result);
+            videoItemModel.videoId=(int) object.get("videoId");
+            videoItemModel.videoAddress=(String) object.get("videoAddress");
+            videoItemModel.coverAddress=(String) object.get("coverAddress");
+            videoItemModel.createTime=(String) object.get("createTime");
+            videoItemModel.isAnalysis=(String) object.get("isAnalysis");
+            videoItemModel.taskId=(int) object.get("taskId");
+            videoItemModel.type=(String) object.get("type");
+            videoItemModel.uid=(int) object.get("uid");
+            videoItemModel.uuid=(String) object.get("uuid");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return videoItemModel;
     }
 
     /**
@@ -51,9 +67,9 @@ public class VideoService {
      * @param file 视频文件
      * @param type 运动类型
      * @param uid 用户id
-     * @return 后端返回的json格式字符串
+     * @return 视频信息（详见VideoItemModel或参考后端接口文档）
      */
-    public String uploadVideo(File file,String type,int uid){
+    public VideoItemModel uploadVideo(File file,String type,int uid){
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -64,7 +80,23 @@ public class VideoService {
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doPost(backendUrl,formBody);
-        return result;
+        VideoItemModel videoItemModel=new VideoItemModel();
+        videoItemModel.video=file;
+        try {
+            JSONObject object=new JSONObject(result);
+            videoItemModel.videoId=(int) object.get("videoId");
+            videoItemModel.videoAddress=(String) object.get("videoAddress");
+            videoItemModel.coverAddress=(String) object.get("coverAddress");
+            videoItemModel.createTime=(String) object.get("createTime");
+            videoItemModel.isAnalysis=(String) object.get("isAnalysis");
+            videoItemModel.taskId=(int) object.get("taskId");
+            videoItemModel.type=(String) object.get("type");
+            videoItemModel.uid=(int) object.get("uid");
+            videoItemModel.uuid=(String) object.get("uuid");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return videoItemModel;
     }
 
     /**

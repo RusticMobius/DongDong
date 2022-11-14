@@ -1,13 +1,14 @@
 package com.example.dongdongapp.service;
 
 import com.example.dongdongapp.config.dongdongappConfiguration;
+import com.example.dongdongapp.model.AnalyseResultModel;
 import com.example.dongdongapp.model.OpenposeResultModel;
 import com.example.dongdongapp.util.DongHTTPClient;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-public class OpenposeService {
+public class TaskService {
     final String openposeUrl= dongdongappConfiguration.openposeUrl;
     final String backendUrl=dongdongappConfiguration.backendUrl+"/task";
 
@@ -42,12 +43,25 @@ public class OpenposeService {
     /**
      * 获取分析结果
      * @param videoId 视频id
-     * @return 后端返回的json格式字符串
+     * @return 分析结果（详见AnalyseResultModel或参考后端接口文档）
      */
-    public String getAnalyseResult(int videoId){
+    public AnalyseResultModel getAnalyseResult(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doGet(backendUrl+"/get/{"+videoId+"}");
-        return result;
+        AnalyseResultModel resultModel=new AnalyseResultModel();
+        try{
+            JSONObject jsonObject=new JSONObject(result);
+            JSONObject jsonObject1=(JSONObject) jsonObject.get("data");
+            if(jsonObject1.has("advice"))  resultModel.advice=(String) jsonObject1.get("advice");
+            if(jsonObject1.has("data"))  resultModel.data=(String) jsonObject1.get("data");
+            if(jsonObject1.has("fileAddress")) resultModel.fileAddress=(String) jsonObject1.get("fileAddress");
+            resultModel.taskId=(int) jsonObject1.get("taskId");
+            resultModel.progress=(int) jsonObject1.get("progress");
+            resultModel.setStatus((String) jsonObject1.get("status"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return resultModel;
     }
 
     /**
@@ -55,10 +69,28 @@ public class OpenposeService {
      * @param videoId 视频id
      * @return 是否成功以及相应信息
      */
-    public String analyseVideo(int videoId){
+    public String analyseVideoData(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String result=dongHTTPClient.doGet(backendUrl+"/analysis/{"+videoId+"}");
         return result;
+    }
+
+    /**
+     * 对视频进行分析
+     * @param videoId 视频id
+     * @return 是否成功
+     */
+    public boolean analyseVideo(int videoId){
+        String res=analyseVideoData(videoId);
+        boolean success=false;
+        try {
+            JSONObject jsonObject=new JSONObject(res);
+            int status=(int) jsonObject.get("status");
+            if (status==1) success=true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return success;
     }
 
 
