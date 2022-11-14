@@ -3,7 +3,11 @@ package com.example.dongdongapp.service;
 import com.example.dongdongapp.config.dongdongappConfiguration;
 import com.example.dongdongapp.util.DongHTTPClient;
 
+import org.json.JSONObject;
+
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class AccountService {
 
@@ -16,14 +20,21 @@ public class AccountService {
      * @return 后端返回的json格式字符串
      */
     public String login(String userName,String passWord){
-        FormBody formBody=new FormBody.Builder()
-                .add("username",userName)
-                .add("password",passWord)
-                .build();
+        JSONObject jsonObject=new JSONObject();
+        try {
+            jsonObject.put("username",userName);
+            jsonObject.put("password",passWord);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        RequestBody body=RequestBody.create(MediaType.parse("application/json;charset=utf8"),jsonObject.toString());
+
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
-        String result=dongHTTPClient.doPost(backendBaseUrl+"/login",formBody);
+        String result=dongHTTPClient.doPost(backendBaseUrl+"/login",body);
         return result;
     }
 
@@ -34,14 +45,21 @@ public class AccountService {
      * @return 后端返回的json格式字符串
      */
     public String register(String userName,String passWord){
-        FormBody formBody=new FormBody.Builder()
-                .add("username",userName)
-                .add("password",passWord)
-                .build();
+        JSONObject jsonObject=new JSONObject();
+        try {
+            jsonObject.put("username",userName);
+            jsonObject.put("password",passWord);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        RequestBody body=RequestBody.create(MediaType.parse("application/json;charset=utf8"),jsonObject.toString());
+
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
-        String result=dongHTTPClient.doPost(backendBaseUrl+"/register",formBody);
+        String result=dongHTTPClient.doPost(backendBaseUrl+"/register",body);
         return result;
     }
 
@@ -51,15 +69,23 @@ public class AccountService {
      * @param passWord 新密码
      * @return 后端返回的json格式字符串
      */
+    @Deprecated
     public String changePassword(String userName,String passWord){
-        FormBody formBody=new FormBody.Builder()
-                .add("username",userName)
-                .add("password",passWord)
-                .build();
+        JSONObject jsonObject=new JSONObject();
+        try {
+            jsonObject.put("username",userName);
+            jsonObject.put("password",passWord);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        RequestBody body=RequestBody.create(MediaType.parse("application/json;charset=utf8"),jsonObject.toString());
+
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
-        String result=dongHTTPClient.doPost(backendBaseUrl+"/changePassword",formBody);
+        String result=dongHTTPClient.doPost(backendBaseUrl+"/changePassword",body);
         return result;
     }
 
