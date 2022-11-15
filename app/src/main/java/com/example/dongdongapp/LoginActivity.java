@@ -64,25 +64,6 @@ public class LoginActivity extends AppCompatActivity {
           // TODO test Thread
           loginThread(userName,password);
 
-
-//          if (userName.length() == 0){
-//            msg = "Please enter your username";
-//            toastView = getLayoutInflater().inflate(R.layout.info_toast_layout, null);
-//            msgText = toastView.findViewById(R.id.toastMsg);
-//            msgText.setText(msg);
-//            toast.setView(toastView);
-//            toast.show();
-//          } else if(password.length() == 0){
-//            msg = "Please enter your password";
-//            toastView = getLayoutInflater().inflate(R.layout.info_toast_layout, null);
-//            msgText = toastView.findViewById(R.id.toastMsg);
-//            msgText.setText(msg);
-//            toast.setView(toastView);
-//            toast.show();
-//          } else {
-//            // loginThread(userName,password);
-//            loginThread(userName,password);
-//          }
         }
       });
     }

@@ -7,5 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".RecordViewPage">
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/nunito_bold"
+    android:text="GOOD JOB!"
+    android:textSize="48dp"/>
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
 
 </LinearLayout>

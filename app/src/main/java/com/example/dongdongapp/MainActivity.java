@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private CourseAdapter courseAdapter;
     private Context context;
     private boolean isLogged;
+    private SharedPreferences userNameSp;
+    private SharedPreferences.Editor spEditor;
 
     // TODO ABOUT USERID sharedPreference
     private int userId = -1;
@@ -114,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
           switch (item.getItemId()){
             case R.id.logoutMenuItem:
             case R.id.toggleMenuItem:
+              userNameSp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+              spEditor = userNameSp.edit();
+              spEditor.putInt("userId",-1);
+              spEditor.apply();
               intent = new Intent(context,LoginActivity.class);
               startActivity(intent);
               break;
