@@ -35,7 +35,7 @@ public class AccountService {
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
-        String result = dongHTTPClient.doPost(backendBaseUrl+"/user/login",body);
+        String result = dongHTTPClient.doPost(backendBaseUrl+"/login",body);
         return result;
     }
 
@@ -79,7 +79,7 @@ public class AccountService {
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
 
-        String result=dongHTTPClient.doPost(backendBaseUrl+"/user/register",body);
+        String result=dongHTTPClient.doPost(backendBaseUrl+"/register",body);
         return result;
     }
 

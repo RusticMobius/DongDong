@@ -111,56 +111,43 @@ public class LoginActivity extends AppCompatActivity {
       new Thread(new Runnable() {
         @Override
         public void run() {
-          Log.d("loginTest","Thread running");
-          int userId = accountService.login("123","123456");
+          int userId = accountService.login(userName,password);
           Log.d("loginTest", String.valueOf(userId));
+          runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              View toastView;
+              TextView msgText;
+              LayoutInflater inflater = LayoutInflater.from(context);
+              Toast toast = new Toast(context);
+              toast.setDuration(Toast.LENGTH_SHORT);
+
+              if (userId != -1){
+                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+                msgText = toastView.findViewById(R.id.toastMsg);
+                msgText.setText("login succeed！");
+                userNameSp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+                spEditor = userNameSp.edit();
+                spEditor.putInt("userId",userId);
+                spEditor.apply();
+                toast.setView(toastView);
+                toast.show();
+
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+
+              } else {
+                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+                msgText = toastView.findViewById(R.id.toastMsg);
+                msgText.setText("login failed!");
+                toast.setView(toastView);
+                toast.show();
+              }
+
+            }
+          });
         }
       }).start();
     }
-//    private void loginThread(String userName, String password){
-//      new Thread(new Runnable() {
-//        @Override
-//        public void run() {
-//          int userId = 0;
-//          Log.d("login", String.valueOf(userId));
-//          userId = accountService.login(userName,password);
-//          Log.d("login", String.valueOf(userId));
-//          runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//              View toastView;
-//              TextView msgText;
-//              LayoutInflater inflater = LayoutInflater.from(context);
-//              Toast toast = new Toast(context);
-//              toast.setDuration(Toast.LENGTH_SHORT);
-//
-//              if (userId != 0){
-//                toastView = inflater.inflate(R.layout.success_toast_layout, null);
-//                msgText = toastView.findViewById(R.id.toastMsg);
-//                msgText.setText("login succeed！");
-//                userNameSp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
-//                spEditor = userNameSp.edit();
-//                spEditor.putInt("userId",userId);
-//                spEditor.apply();
-//                toast.setView(toastView);
-//                toast.show();
-//
-//                Intent intent = new Intent(context, MainActivity.class);
-//                startActivity(intent);
-//
-//              } else {
-//                toastView = inflater.inflate(R.layout.success_toast_layout, null);
-//                msgText = toastView.findViewById(R.id.toastMsg);
-//                msgText.setText("login failed!");
-//                toast.setView(toastView);
-//                toast.show();
-//              }
-//
-//            }
-//          });
-//        }
-//      }).start();
-//
-//    }
 
 }

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,8 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
             toast.setView(toastView);
 
             toast.show();
-          }
-          else if (! password.equals(repeatPassword)){
+          } else if (! password.equals(repeatPassword)){
             msg = "The two entered passwords do not match!";
             toastView = getLayoutInflater().inflate(R.layout.warning_toast_layout, null);
             msgText = toastView.findViewById(R.id.toastMsg);
@@ -118,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             toast.show();
           } else {
-            // accountService.register(userName, password);
+            registerThread(userName, password);
           }
         }
       });
@@ -134,14 +135,43 @@ public class RegisterActivity extends AppCompatActivity {
       });
     }
 
-    private boolean registerThread(String userName, String password){
+    private void registerThread(String userName, String password){
       // TODO
       new Thread(new Runnable() {
         @Override
         public void run() {
-          accountService.register(userName, password);
+          Log.d("registerTest","thread running");
+          int userId = accountService.register(userName, password);
+          Log.d("registerTest", String.valueOf(userId));
+          runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              View toastView;
+              TextView msgText;
+              LayoutInflater inflater = LayoutInflater.from(context);
+              Toast toast = new Toast(context);
+              toast.setDuration(Toast.LENGTH_SHORT);
+
+              if (userId != -1){
+                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+                msgText = toastView.findViewById(R.id.toastMsg);
+                msgText.setText("register succeed！");
+                toast.setView(toastView);
+                toast.show();
+
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivity(intent);
+
+              } else {
+                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+                msgText = toastView.findViewById(R.id.toastMsg);
+                msgText.setText("register failed!");
+                toast.setView(toastView);
+                toast.show();
+              }
+            }
+          });
         }
-      }) ;
-      return false;
+      }).start(); ;
     }
 }

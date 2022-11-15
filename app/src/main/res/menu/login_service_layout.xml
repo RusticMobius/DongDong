@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:icon="@drawable/ic_outline_info_24"
+    android:id="@+id/logoutMenuItem"
+    android:title="Sign Out"
+    />
+  <item
+    android:icon="@drawable/ic_baseline_build_circle_24"
+    android:id="@+id/registerMenuItem"
+    android:title="Register"/>
+  <item
+    android:icon="@drawable/ic_baseline_supervised_user_circle_24"
+    android:id="@+id/toggleMenuItem"
+    android:title="Switch Account"/>
+
+</menu>
