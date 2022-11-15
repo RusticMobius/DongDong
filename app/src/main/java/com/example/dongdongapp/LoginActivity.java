@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void run() {
           Log.d("loginTest","Thread running");
-          int userId = accountService.login(userName,password);
+          int userId = accountService.login("123","123456");
           Log.d("loginTest", String.valueOf(userId));
         }
       }).start();

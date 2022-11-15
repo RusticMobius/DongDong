@@ -43,7 +43,7 @@ public class DongHTTPClient {
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        Log.d("dongHTTPClient","msg"+e);
+                        Log.d("dongHTTPClient","msg："+e);
                     }
 
                     @Override
