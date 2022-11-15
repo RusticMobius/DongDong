@@ -1,21 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".RecordViewPage">
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:fontFamily="@font/nunito_bold"
-    android:text="GOOD JOB!"
-    android:textSize="48dp"/>
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    />
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".RecordViewPage"
+  android:background="@drawable/recycler_view_border_blue">
 
-</LinearLayout>
+  <ImageButton
+    android:id="@+id/retButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/none_select_state"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="24dp"
+    android:layout_marginStart="24dp"
+    app:srcCompat="@drawable/ic_baseline_arrow_back_32_blue" />
+
+  <VideoView
+    android:id="@+id/recordVideoView"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginEnd="24dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/courageLine" />
+
+  <ImageButton
+    android:id="@+id/playButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    app:srcCompat="@drawable/ic_baseline_play_circle_48"
+    android:background="@color/none_select_state"
+    app:layout_constraintBottom_toBottomOf="@+id/courageLine"
+    app:layout_constraintStart_toEndOf="@+id/courageLine"
+    app:layout_constraintTop_toTopOf="@+id/courageLine" />
+
+  <TextView
+    android:id="@+id/courageLine"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="120dp"
+    android:fontFamily="@font/nunito_bold"
+    android:text="NICE TRY!"
+    android:textSize="48dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+  <TextView
+    android:id="@+id/ratingTextView"
+    android:layout_width="72dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="48dp"
+    android:layout_marginTop="44dp"
+    android:fontFamily="@font/nunito_bold"
+    android:gravity="center_vertical|center_horizontal"
+    android:text="A"
+    android:textSize="48dp"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/recordVideoView" />
+
+  <TextView
+    android:id="@+id/recordAdviceTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="44dp"
+    android:fontFamily="@font/nunito_bold"
+    android:text="Some Advices"
+    android:textSize="24dp"
+    app:layout_constraintStart_toEndOf="@+id/ratingTextView"
+    app:layout_constraintTop_toBottomOf="@+id/recordVideoView" />
+
+  <TextView
+    android:id="@+id/recordAdvice"
+    android:layout_width="256dp"
+    android:layout_height="100dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:text="this is a piece of advice this is a piece of advice this is a piece of advice"
+    android:textSize="16dp"
+    app:layout_constraintStart_toEndOf="@+id/ratingTextView"
+    app:layout_constraintTop_toBottomOf="@+id/recordAdviceTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

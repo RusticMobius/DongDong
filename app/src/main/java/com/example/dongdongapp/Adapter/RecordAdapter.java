@@ -1,6 +1,7 @@
 package com.example.dongdongapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dongdongapp.R;
+import com.example.dongdongapp.RecordViewPage;
 import com.example.dongdongapp.model.RecordModel;
 
 import java.util.List;
@@ -65,6 +67,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
       public void onClick(View v) {
         Log.d("recordAdapter","clicked a record!");
         // TODO DO WE NEED a page for record detail ?
+        Intent intent = new Intent(context, RecordViewPage.class);
+        context.startActivity(intent);
       }
     });
   }
