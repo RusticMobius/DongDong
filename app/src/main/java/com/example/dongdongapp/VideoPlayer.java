@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+// 录制视频预览界面
 
 public class VideoPlayer extends AppCompatActivity {
 

@@ -39,7 +39,7 @@ import java.util.*
 
 typealias LumaListener = (luma: Double) -> Unit
 
-
+// 视频录制页面
 class VideoRecordPage : AppCompatActivity() {
     private lateinit var viewBinding: ActivityVideoRecordPageBinding
     private var imageCapture: ImageCapture? = null
