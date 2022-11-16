@@ -52,11 +52,17 @@ class VideoRecordPage : AppCompatActivity() {
     private var videoUri: Uri? = null
 
     private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var infoBundle: Bundle? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityVideoRecordPageBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+      infoBundle = this.intent.extras;
+
 
       // Request camera permissions
       if (allPermissionsGranted()) {
@@ -195,7 +201,10 @@ class VideoRecordPage : AppCompatActivity() {
               // TODO GOTO PREVIEW
               videoUri = recordEvent.outputResults.outputUri
               val intent = Intent(this,VideoPlayer::class.java)
+
+              // infoBundle?.putString("videoUri", videoUri.toString())
               intent.data = videoUri
+              infoBundle?.let { intent.putExtras(it) }
               startActivityForResult(intent,1)
 
             } else {

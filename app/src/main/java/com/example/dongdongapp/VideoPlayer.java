@@ -52,7 +52,9 @@ public class VideoPlayer extends AppCompatActivity {
 
 
         videoUri = getIntent().getData();
+        Bundle infoBundle = getIntent().getExtras();
         Log.d("checkUri", String.valueOf(videoUri));
+        Log.d("checkBundleIndo",infoBundle.getString("courseType"));
 
         mediaPlayer = new MediaPlayer();
         timer = new Timer();
@@ -141,6 +143,7 @@ public class VideoPlayer extends AppCompatActivity {
 
     private void retToRedo(){
       //TODO
+      mediaPlayer = null;
       finish();
     }
 
@@ -223,7 +226,7 @@ public class VideoPlayer extends AppCompatActivity {
       timer.schedule(new TimerTask() {
         @Override
         public void run() {
-          if(!isSeekbarOnChange){
+          if(!isSeekbarOnChange && mediaPlayer != null){
             seekBar.setProgress(mediaPlayer.getCurrentPosition());
           }
         }

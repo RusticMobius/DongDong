@@ -28,12 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private List<CourseModel> courseList;
     private CourseAdapter courseAdapter;
     private Context context;
-    private boolean isLogged;
     private SharedPreferences userNameSp;
     private SharedPreferences.Editor spEditor;
 
     // TODO ABOUT USERID sharedPreference
-    private int userId = -1;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,38 +40,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();   //隐藏最上部帮助栏
         context = this;
-        courseList = new ArrayList<>();
+        courseList = new CourseModel().getCourseModelList();
         courseRecyclerView = findViewById(R.id.courseRecyclerView);
         courseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         userButton = findViewById(R.id.userButton);
-
-        courseAdapter = new CourseAdapter(this, userId);
-
-        courseList = new ArrayList<>();
         userId = getSharedPreferences("loginInfo",Context.MODE_PRIVATE).getInt("userId",userId);
+        courseAdapter = new CourseAdapter(this, userId);
         initButtonListener();
-
-
-      // fake data
-        // TODO read courseList from ...
-
-        for(int i = 0; i < 5; i++){
-          CourseModel fakeCourse = new CourseModel();
-          fakeCourse.setCourseName("FAKE COURSE " + i );
-          fakeCourse.setCourseDescription("a fake course description for frontend test");
-          fakeCourse.setStatus(0);
-          courseList.add(fakeCourse);
-          Random random = new Random();
-          int tipsNum = 1 + random.nextInt(7);
-          String tips = "";
-          for(int j = 0; j < tipsNum; j++ ){
-            tips += "Tips" + (j+1) + ": this is a tips for course" + i + "\n\n\n";
-          }
-          fakeCourse.setTips(tips);
-
-
-        }
-
         courseAdapter.setCourseList(courseList);
         courseRecyclerView.setAdapter(courseAdapter);
 
@@ -80,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
           Intent intent = new Intent(this, LoginActivity.class);
           this.startActivity(intent);
         }
+
 
 
         //TODO CONTROL LOG LOGICAL
@@ -93,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
           showPopupMenu(userButton);
         }
       });
-    }
-    private void initMenuListener(){
-
     }
 
     private void showPopupMenu(View view){

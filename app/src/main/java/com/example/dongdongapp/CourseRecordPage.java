@@ -17,6 +17,7 @@ public class CourseRecordPage extends AppCompatActivity {
     private int userId;
     private String allTips;
     private String courseName;
+    private String courseType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class CourseRecordPage extends AppCompatActivity {
         userId = bundle.getInt("userId");
         courseName = bundle.getString("courseName");
         allTips = bundle.getString("courseTips");
+        courseType = bundle.getString("courseType");
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPage);
@@ -75,6 +77,8 @@ public class CourseRecordPage extends AppCompatActivity {
       bundle.putInt("courseId",courseId);
       bundle.putString("courseName",courseName);
       bundle.putString("courseTips",allTips);
+      bundle.putInt("userId",userId);
+      bundle.putString("courseType",courseType);
       return bundle;
     }
 

@@ -65,12 +65,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         Bundle bundle = new Bundle();
         bundle.putInt("courseId", item.getId());
         bundle.putInt("userId", userId);
-        bundle.putString("courseName",item.getCourseName());
-        bundle.putString("courseTips",item.getTips());
+        bundle.putString("courseName", item.getCourseName());
+        bundle.putString("courseTips", item.getTips());
+        bundle.putString("courseType", item.getCourseType());
         Intent intent = new Intent((Activity)context, CourseRecordPage.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
-
 
       }
     });

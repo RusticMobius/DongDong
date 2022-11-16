@@ -14,10 +14,12 @@ public class CoursePage extends AppCompatActivity {
 
     private TextView courseNameView;
     private TextView tipsView;
-    private String allTips;
-    private String courseName;
+    private int userId;
+    private int courseId;
+    private String courseType;
     private ImageButton retButton;
     private Button recordButton;
+    private Bundle recordActivityBundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,26 +37,38 @@ public class CoursePage extends AppCompatActivity {
 
         courseNameView.setText(bundle.getString("courseName"));
         tipsView.setText(bundle.getString("courseTips"));
+        courseId = bundle.getInt("courseId");
+        userId = bundle.getInt("userId");
+        courseType = bundle.getString("courseType");
+        initRecordIntentBundle();
+        initButtonListener();
+    }
 
+    private void initButtonListener(){
+      retButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          Intent intent = new Intent(CoursePage.this, MainActivity.class);
+          CoursePage.this.startActivity(intent);
+        }
+      });
 
+      recordButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          // Intent intent = new Intent(CoursePage.this, VideoRecordPage.class);
+          // intent.putExtras(recordActivityBundle);
+          // startActivityForResult(intent,1);
 
-        retButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Intent intent = new Intent(CoursePage.this, MainActivity.class);
-            CoursePage.this.startActivity(intent);
-          }
-        });
+        }
+      });
+    }
 
-        recordButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Intent intent = new Intent(CoursePage.this, VideoRecordPage.class);
-            startActivityForResult(intent,1);
-
-          }
-        });
-
+    private void initRecordIntentBundle(){
+      recordActivityBundle = new Bundle();
+      recordActivityBundle.putInt("courseId", courseId);
+      recordActivityBundle.putInt("userId", userId);
+      recordActivityBundle.putString("courseType",courseType);
 
     }
 }

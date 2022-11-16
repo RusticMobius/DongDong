@@ -33,10 +33,13 @@ public class CourseFragment extends Fragment {
     private TextView tipsView;
     private String allTips;
     private String courseName;
+    private String courseType;
+    private int userId;
     private int courseId;
     private ImageButton retButton;
     private Button recordButton;
     private String TAG = "courseFragment";
+    private Bundle recordActivityBundle;
 
     public CourseFragment() {
         // Required empty public constructor
@@ -64,11 +67,11 @@ public class CourseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
+            courseType = getArguments().getString("courseType");
             courseName = getArguments().getString("courseName");
             allTips = getArguments().getString("courseTips");
             courseId = getArguments().getInt("courseId");
+          userId = getArguments().getInt("userId");
         }
     }
 
@@ -85,7 +88,7 @@ public class CourseFragment extends Fragment {
         tipsView.setText(allTips);
         tipsView.setMovementMethod(ScrollingMovementMethod.getInstance());
         initButtonListener();
-
+        initRecordIntentBundle();
         return view;
     }
 
@@ -94,6 +97,7 @@ public class CourseFragment extends Fragment {
         @Override
         public void onClick(View v) {
           Intent intent = new Intent(getActivity(), VideoRecordPage.class);
+          intent.putExtras(recordActivityBundle);
           startActivityForResult(intent,1);
         }
       });
@@ -107,4 +111,11 @@ public class CourseFragment extends Fragment {
         }
       });
     }
+
+  private void initRecordIntentBundle(){
+    recordActivityBundle = new Bundle();
+    recordActivityBundle.putInt("courseId", courseId);
+    recordActivityBundle.putInt("userId", userId);
+    recordActivityBundle.putString("courseType",courseType);
+  }
 }
