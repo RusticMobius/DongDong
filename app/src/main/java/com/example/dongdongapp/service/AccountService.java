@@ -90,7 +90,7 @@ public class AccountService {
      * @return 用户id,若登录失败返回0或-1
      */
     public int register(String userName,String passWord){
-        String resultStr=getLoginResult(userName,passWord);
+        String resultStr=getRegisterResult(userName,passWord);
         int userId=-1;
         try{
             JSONObject jsonObject=new JSONObject(resultStr);

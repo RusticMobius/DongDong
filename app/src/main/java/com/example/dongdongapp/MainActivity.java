@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,10 +18,9 @@ import android.widget.PopupMenu;
 
 import com.example.dongdongapp.Adapter.CourseAdapter;
 import com.example.dongdongapp.model.CourseModel;
+import com.example.dongdongapp.util.RealPathUtil;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton userButton;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         courseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         userButton = findViewById(R.id.userButton);
         userId = getSharedPreferences("loginInfo",Context.MODE_PRIVATE).getInt("userId",userId);
+        Log.d("checkUserId", String.valueOf(userId));
         courseAdapter = new CourseAdapter(this, userId);
         initButtonListener();
         courseAdapter.setCourseList(courseList);
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
           this.startActivity(intent);
         }
 
+        UriConverterTest();
 
 
         //TODO CONTROL LOG LOGICAL
@@ -115,5 +117,12 @@ public class MainActivity extends AppCompatActivity {
 
     public int getUserId(){
       return userId;
+    }
+
+    private void UriConverterTest(){
+      Uri uri = Uri.parse("content://media/external/video/media/1000000046");
+      RealPathUtil realPathUtil = new RealPathUtil();
+      String path = RealPathUtil.getRealPath(context,uri);
+      Log.d("parseUri",path);
     }
 }
