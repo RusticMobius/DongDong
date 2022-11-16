@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.dongdongapp.service.AccountService;
 import com.example.dongdongapp.util.CustomToast;
 
+// 登陆界面
+
 public class LoginActivity extends AppCompatActivity {
     private ImageButton retButton;
     private Button loginButton;

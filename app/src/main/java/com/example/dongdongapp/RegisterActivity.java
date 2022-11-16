@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.dongdongapp.service.AccountService;
 
+// 注册页面
+
 public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private ImageButton retButton;
