@@ -13,6 +13,7 @@ public class VideoItemModel {
     public String coverAddress;
     public int taskId;
     public String createTime;
+    public String advice;
 
     public File getVideo() {
         return video;

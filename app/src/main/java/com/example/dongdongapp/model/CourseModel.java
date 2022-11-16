@@ -130,5 +130,21 @@ public class CourseModel {
     return courseModelList;
   }
 
+  /**
+   * 根据运动类型返回课程id
+   * @param type 运动类型
+   * @return
+   */
+  public int getCourseIdByType(String type){
+    int index=-1;
+    for (int i = 0; i < courseTypeTable.length; i++) {
+      if(courseTypeTable[i].equals(type)){
+        index=i;
+        break;
+      }
+    }
+    return index;
+  }
+
 
 }
