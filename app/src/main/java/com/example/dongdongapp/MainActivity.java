@@ -18,6 +18,8 @@ import android.widget.PopupMenu;
 
 import com.example.dongdongapp.Adapter.CourseAdapter;
 import com.example.dongdongapp.model.CourseModel;
+import com.example.dongdongapp.model.VideoItemModel;
+import com.example.dongdongapp.service.VideoService;
 import com.example.dongdongapp.util.RealPathUtil;
 
 import java.util.List;
@@ -51,12 +53,13 @@ public class MainActivity extends AppCompatActivity {
         courseAdapter.setCourseList(courseList);
         courseRecyclerView.setAdapter(courseAdapter);
 
-        if (userId == -1){
+        if (userId == -1 || userId == 0){
           Intent intent = new Intent(this, LoginActivity.class);
           this.startActivity(intent);
         }
 
-        UriConverterTest();
+        // UriConverterTest();
+        UploadPageTest();
 
 
         //TODO CONTROL LOG LOGICAL
@@ -121,8 +124,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void UriConverterTest(){
       Uri uri = Uri.parse("content://media/external/video/media/1000000046");
-      RealPathUtil realPathUtil = new RealPathUtil();
       String path = RealPathUtil.getRealPath(context,uri);
       Log.d("parseUri",path);
+    }
+
+    private void UploadPageTest(){
+//      Bundle bundle = new Bundle();
+//      Intent intent = new Intent(context,AnalyzePage.class);
+//      startActivity(intent);
+      Uri uri = Uri.parse("content://media/external/video/media/1000000046");
+      String path = RealPathUtil.getRealPath(context,uri);
+      String courseType = "VIDEO_HIGHKNEES";
+      VideoService videoService = new VideoService();
+      new Thread(new Runnable() {
+        @Override
+        public void run() {
+          VideoItemModel videoItemModel = videoService.uploadVideo(path, courseType, userId);
+          // Log.d("uploadVideoTest", String.valueOf(videoItemModel.getVideoId()));
+        }
+      }).start();
+
     }
 }

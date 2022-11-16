@@ -3,6 +3,8 @@ package com.example.dongdongapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +33,8 @@ public class VideoPlayer extends AppCompatActivity {
     private TextView totalTime;
     private SurfaceHolder surfaceHolder;
     private Uri videoUri;
+    private Context context;
+    private Bundle infoBundle;
 
     private Timer timer;  //定时器
     private boolean isSeekbarOnChange; //互斥变量，防止进度条和定时器冲突。
@@ -50,9 +54,14 @@ public class VideoPlayer extends AppCompatActivity {
         currentTime = findViewById(R.id.currentTime);
         totalTime = findViewById(R.id.totalTime);
 
+        context = this.getApplicationContext();
+
 
         videoUri = getIntent().getData();
-        Bundle infoBundle = getIntent().getExtras();
+
+        infoBundle = getIntent().getExtras();
+        infoBundle.putString("videoUri", String.valueOf(videoUri));
+
         Log.d("checkUri", String.valueOf(videoUri));
         Log.d("checkBundleIndo",infoBundle.getString("courseType"));
 
@@ -149,6 +158,10 @@ public class VideoPlayer extends AppCompatActivity {
 
     private void uploadVideo(){
       //TODO
+      mediaPlayer = null;
+      Intent intent = new Intent(context, UploadPage.class);
+      intent.putExtras(infoBundle);
+      startActivity(intent);
     }
 
     private void setPlayVideo(){

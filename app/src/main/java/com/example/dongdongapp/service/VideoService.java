@@ -1,5 +1,7 @@
 package com.example.dongdongapp.service;
 
+import android.util.Log;
+
 import com.example.dongdongapp.config.dongdongappConfiguration;
 import com.example.dongdongapp.model.VideoItemModel;
 import com.example.dongdongapp.util.DongFTPClient;
@@ -32,7 +34,8 @@ public class VideoService {
      * @return 视频信息（详见VideoItemModel或参考后端接口文档）
      */
     public VideoItemModel uploadVideo(String fileName,String type,int uid){
-        File file=new File(localVideoPath+"/"+fileName);
+        // File file=new File(localVideoPath+"/"+fileName);
+        File file = new File(fileName);
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -42,7 +45,7 @@ public class VideoService {
                 .build();
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String result=dongHTTPClient.doPost(backendUrl,formBody);
+        String result=dongHTTPClient.doPost(backendUrl + "/upload",formBody);
         VideoItemModel videoItemModel=new VideoItemModel();
         videoItemModel.video=file;
         try {
@@ -56,6 +59,7 @@ public class VideoService {
             videoItemModel.type=(String) object.get("type");
             videoItemModel.uid=(int) object.get("uid");
             videoItemModel.uuid=(String) object.get("uuid");
+            Log.d("uploadVideoTest",(String) object.get("status"));
         }catch (Exception e){
             e.printStackTrace();
         }

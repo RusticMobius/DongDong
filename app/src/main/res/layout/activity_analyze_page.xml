@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".AnalyzePage"
+  android:background="@drawable/analyze_background">
+
+
+  <TextView
+    android:id="@+id/promptLine"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="84dp"
+    android:fontFamily="@font/nunito_bold"
+    android:text="Uploaded Successfully"
+    android:textSize="40dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/promptLine2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="28dp"
+    android:fontFamily="@font/nunito_semibold"
+    android:text="The video is being analyzed"
+    android:textSize="24dp"
+    app:layout_constraintStart_toStartOf="@+id/promptLine"
+    app:layout_constraintTop_toBottomOf="@+id/promptLine" />
+
+    <com.airbnb.lottie.LottieAnimationView
+      android:layout_gravity="center_horizontal|center_vertical"
+      android:layout_width="300dp"
+      android:layout_height="300dp"
+      android:id="@+id/lottieView"
+      app:lottie_rawRes="@raw/analyze"
+      app:lottie_loop="true"
+      app:lottie_autoPlay="true"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/promptLine2"
+      android:layout_marginTop="36dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
