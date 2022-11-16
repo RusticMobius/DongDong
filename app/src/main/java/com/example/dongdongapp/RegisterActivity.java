@@ -163,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
 
               } else {
-                toastView = inflater.inflate(R.layout.success_toast_layout, null);
+                toastView = inflater.inflate(R.layout.error_toast_layout, null);
                 msgText = toastView.findViewById(R.id.toastMsg);
                 msgText.setText("register failed!");
                 toast.setView(toastView);
