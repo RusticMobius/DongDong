@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.example.dongdongapp.service.VideoService;
 import com.example.dongdongapp.util.RealPathUtil;
-
+// 上传服务及缓冲页面
 public class UploadPage extends AppCompatActivity {
 
     private int userId;
