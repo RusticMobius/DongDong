@@ -3,28 +3,44 @@ package com.example.dongdongapp.model;
 public class RecordModel implements Comparable<RecordModel> {
   // TODO reverse 1-5 to rank ABC
   // 5-A+ 4-A 3-B 2,1-C
-  private String recordRank;
+  private String recordRank;  // data 里的评分 1～5分
   // TODO construct format just like "in 2022.10.28"
-  private String recordDate;
-  private String recordAdvice;
+  private String recordDate;  //  返回里的createTime，需要转换成2022.10.01这样
+  private String recordAdvice;  // advice
+
 
   // TODO use this key to sort record list. latest in top or use timestamp
-  private int recordId;
+  private int recordId;   //  taskId
+
 
   // TODO
   //  which course is this record belong to
-  private int courseId;
-  private int userId;
+  private String courseType;  //t ype
+  private int userId;   //  uid
+
+  private String videoUrl;  // fileAddress
+
+  private boolean isAnalyzeFinish;  // status RUNNING : false FINISH : true
 
   private final String[] rankTable={"C","C","B","A","A+","A+"};
+
+
+  public boolean isAnalyzeFinish() {
+    return isAnalyzeFinish;
+  }
+
+  public String getVideoUrl() {
+    return videoUrl;
+  }
 
   public int getRecordId() {
     return recordId;
   }
 
-  public int getCourseId() {
-    return courseId;
+  public String getCourseType() {
+    return courseType;
   }
+
 
   public int getUserId() {
     return userId;
@@ -42,8 +58,12 @@ public class RecordModel implements Comparable<RecordModel> {
     return recordAdvice;
   }
 
-  public void setCourseId(int courseId) {
-    this.courseId = courseId;
+  public void setCourseType(String courseType) {
+    this.courseType = courseType;
+  }
+
+  public void setVideoUrl(String videoUrl) {
+    this.videoUrl = videoUrl;
   }
 
   public void setUserId(int userId) {

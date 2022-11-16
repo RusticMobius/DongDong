@@ -84,7 +84,7 @@ public class RecordFragment extends Fragment {
         }
         // recordModelList = new ArrayList<RecordModel>();
         recordModelList = setRecordModelList();
-        recordAdapter = new RecordAdapter(getContext(),userId,courseId);
+        recordAdapter = new RecordAdapter(getContext(),getArguments());
         recordAdapter.setRecordModelList(recordModelList);
     }
 

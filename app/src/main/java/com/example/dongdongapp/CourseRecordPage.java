@@ -87,6 +87,8 @@ public class CourseRecordPage extends AppCompatActivity {
       bundle.putInt("courseInt",courseId);
       bundle.putInt("userId",userId);
       bundle.putString("courseName",courseName);
+      bundle.putString("courseType",courseType);
+      bundle.putString("courseTips",allTips);
       return bundle;
     }
 }

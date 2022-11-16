@@ -2,6 +2,7 @@ package com.example.dongdongapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +17,14 @@ public class UploadPage extends AppCompatActivity {
     private String courseType;
     private Uri videoUri;
     private VideoService videoService ;
+    private Bundle bundle;
 
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_page);
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         userId = bundle.getInt("userId");
         courseId = bundle.getInt("courseId");
         courseType = bundle.getString("courseType");
@@ -36,7 +38,15 @@ public class UploadPage extends AppCompatActivity {
       new Thread(new Runnable() {
         @Override
         public void run() {
-          // videoService.uploadVideo(videoPath, courseType, userId);
+          videoService.uploadVideo(videoPath, courseType, userId);
+          runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              Intent intent = new Intent(getApplicationContext(),AnalyzePage.class);
+              intent.putExtras(bundle);
+              startActivity(intent);
+            }
+          });
         }
       }).start();
     }

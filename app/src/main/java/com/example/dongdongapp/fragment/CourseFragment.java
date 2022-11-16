@@ -117,5 +117,7 @@ public class CourseFragment extends Fragment {
     recordActivityBundle.putInt("courseId", courseId);
     recordActivityBundle.putInt("userId", userId);
     recordActivityBundle.putString("courseType",courseType);
+    recordActivityBundle.putString("courseName",courseName);
+    recordActivityBundle.putString("courseTips",allTips);
   }
 }

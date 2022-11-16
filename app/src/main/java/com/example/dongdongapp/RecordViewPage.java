@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -36,7 +37,24 @@ public class RecordViewPage extends AppCompatActivity {
     }
 
     private void initButtonListener(){
-
+      retButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          finish();
+        }
+      });
+      playButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          if(vvVideo.isPlaying()){
+            playButton.setImageResource(R.drawable.ic_baseline_pause_circle_outline_48);
+            vvVideo.pause();
+          } else {
+            playButton.setImageResource(R.drawable.ic_baseline_play_circle_outline_blue_48);
+            vvVideo.start();
+          }
+        }
+      });
     }
 
     private void initVideoView(){

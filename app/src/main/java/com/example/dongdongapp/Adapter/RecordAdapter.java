@@ -3,6 +3,7 @@ package com.example.dongdongapp.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +25,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
   private Context context;
   private int userId;
   private int courseId;
+  private String courseType;
 
-  public RecordAdapter(Context context, int userId, int courseId){
+  public RecordAdapter(Context context, Bundle bundle){
     this.context = context;
-    this.userId = userId;
-    this.courseId = courseId;
+    this.userId = bundle.getInt("userId");
+    this.courseId = bundle.getInt("courseId");
+    this.courseType = bundle.getString("courseType");
   }
 
   @NonNull
