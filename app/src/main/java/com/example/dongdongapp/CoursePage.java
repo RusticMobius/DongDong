@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+// 弃用的课程详情页，改用了底部有tabBar的页面
+
 public class CoursePage extends AppCompatActivity {
 
     private TextView courseNameView;

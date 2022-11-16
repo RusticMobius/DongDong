@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.example.dongdongapp.Adapter.ViewPageAdapter;
 import com.google.android.material.tabs.TabLayout;
 
+// 课程详情页/用户训练记录页面
 public class CourseRecordPage extends AppCompatActivity {
 
     private TabLayout tabLayout;
