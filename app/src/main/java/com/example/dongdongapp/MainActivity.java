@@ -25,7 +25,7 @@ import com.example.dongdongapp.util.RealPathUtil;
 import java.util.List;
 
 
-  // 用户主页
+  // App用户主页 课程列表页面
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton userButton;
