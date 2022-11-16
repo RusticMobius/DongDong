@@ -30,6 +30,9 @@ import java.util.Random;
  * Use the {@link RecordFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+// 用户学习记录列表页
+
 public class RecordFragment extends Fragment {
 
 //     TODO: Rename parameter arguments, choose names that match
