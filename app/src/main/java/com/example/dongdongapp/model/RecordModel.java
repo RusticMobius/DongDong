@@ -86,6 +86,10 @@ public class RecordModel implements Comparable<RecordModel> {
     this.recordAdvice = recordAdvice;
   }
 
+  public void setStatus(String status){
+    this.isAnalyzeFinish=status.equals("FINISH");
+  }
+
   @Override
   public int compareTo(RecordModel o) {
     if(this.recordId > o.recordId){

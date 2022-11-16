@@ -237,12 +237,14 @@ public class VideoService {
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject object=(JSONObject) jsonArray.get(i);
                 RecordModel recordModel=new RecordModel();
-                recordModel.setRecordDate((String) object.get("createTime"));
+                recordModel.setRecordDate(parseRecordDate((String) object.get("createTime")));
                 recordModel.setRecordAdvice((String) object.get("advice"));
-                CourseModel courseModel=new CourseModel();
-                int courseId=courseModel.getCourseIdByType((String) object.get("type"));
-                recordModel.setCourseId(courseId);
+                recordModel.setCourseType((String) object.get("type"));
                 recordModel.setUserId((int) object.get("uid"));
+                recordModel.setRecordId((int) object.get("taskId"));
+                recordModel.setRank(parseScore((String) object.get("data")));
+                recordModel.setVideoUrl((String) object.get("fileAddress"));
+                recordModel.setStatus((String) object.get("status"));
                 recordModelArrayList.add(recordModel);
             }
         }catch (Exception e){
@@ -254,6 +256,22 @@ public class VideoService {
     private String getFileName(String filePath){
         String[] params=filePath.split("/");
         return params[params.length-1];
+    }
+
+    private String parseRecordDate(String createTime){
+        String[] params1=createTime.split(" ");
+        return params1[0].replace("-",".");
+    }
+
+    private int parseScore(String dataStr){
+        //TODO:将data内的内容转化为分数（逻辑待验证）
+        String dataContent=dataStr
+                .replace("[","")
+                .replace("]","")
+                .replace("{","")
+                .replace("}","");
+        String scoreContent=dataContent.split(",")[0];
+        return Integer.parseInt(scoreContent.split("=")[1]);
     }
 
 }
