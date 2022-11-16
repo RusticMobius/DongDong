@@ -24,6 +24,9 @@ import com.example.dongdongapp.util.RealPathUtil;
 
 import java.util.List;
 
+
+  // 用户主页
+
 public class MainActivity extends AppCompatActivity {
     private ImageButton userButton;
     private RecyclerView courseRecyclerView;
