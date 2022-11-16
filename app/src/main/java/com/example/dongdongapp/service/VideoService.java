@@ -3,6 +3,8 @@ package com.example.dongdongapp.service;
 import android.util.Log;
 
 import com.example.dongdongapp.config.dongdongappConfiguration;
+import com.example.dongdongapp.model.CourseModel;
+import com.example.dongdongapp.model.RecordModel;
 import com.example.dongdongapp.model.VideoItemModel;
 import com.example.dongdongapp.util.DongFTPClient;
 import com.example.dongdongapp.util.DongHTTPClient;
@@ -217,6 +219,36 @@ public class VideoService {
             videoItemModel.video=new File(videoFileName);
         }
         return videoList;
+    }
+
+    /**
+     * 根据运动类型获取运动记录
+     * @param uid 用户id
+     * @param type 运动类型
+     * @return 运动记录列表
+     */
+    public ArrayList<RecordModel> getRecordByType(int uid,String type){
+        ArrayList<RecordModel> recordModelArrayList=new ArrayList<>();
+        DongHTTPClient dongHTTPClient=new DongHTTPClient();
+        String res=dongHTTPClient.doGet(backendUrl+"/getVideoByType/{"+uid+"}/{"+type+"}");
+        try {
+            JSONObject jsonObject=new JSONObject(res);
+            JSONArray jsonArray=(JSONArray) jsonObject.get("data");
+            for (int i=0;i<jsonArray.length();i++){
+                JSONObject object=(JSONObject) jsonArray.get(i);
+                RecordModel recordModel=new RecordModel();
+                recordModel.setRecordDate((String) object.get("createTime"));
+                recordModel.setRecordAdvice((String) object.get("advice"));
+                CourseModel courseModel=new CourseModel();
+                int courseId=courseModel.getCourseIdByType((String) object.get("type"));
+                recordModel.setCourseId(courseId);
+                recordModel.setUserId((int) object.get("uid"));
+                recordModelArrayList.add(recordModel);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return recordModelArrayList;
     }
 
     private String getFileName(String filePath){
