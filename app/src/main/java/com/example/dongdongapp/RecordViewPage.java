@@ -12,6 +12,8 @@ import android.widget.VideoView;
 
 import java.net.URI;
 
+// 分析详情页
+
 public class RecordViewPage extends AppCompatActivity {
 
     private VideoView vvVideo;
