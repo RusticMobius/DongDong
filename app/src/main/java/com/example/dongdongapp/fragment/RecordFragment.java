@@ -17,6 +17,7 @@ import com.example.dongdongapp.Adapter.RecordAdapter;
 import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.model.RecordModel;
+import com.example.dongdongapp.service.VideoService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +45,7 @@ public class RecordFragment extends Fragment {
     private RecordAdapter recordAdapter;
     private int courseId;
     private int userId;
+    private String courseType;
     private String courseName;
 
     private TextView guideText;
@@ -81,6 +83,7 @@ public class RecordFragment extends Fragment {
               courseId = getArguments().getInt("courseId");
               userId = getArguments().getInt("userId");
               courseName = getArguments().getString("courseName");
+              courseType = getArguments().getString("courseType");
         }
         // recordModelList = new ArrayList<RecordModel>();
         recordModelList = setRecordModelList();
@@ -120,7 +123,12 @@ public class RecordFragment extends Fragment {
 
     private List<RecordModel> setRecordModelList(){
       // TODO implement a method to get user record list in THIS COURSE
+
+
       List<RecordModel> recordModelList = new ArrayList<>();
+
+//      VideoService videoService = new VideoService();
+//      recordModelList = videoService.getRecordByType(userId, courseType);
 
       // fake implement
       Random random = new Random();

@@ -139,8 +139,9 @@ public class MainActivity extends AppCompatActivity {
       new Thread(new Runnable() {
         @Override
         public void run() {
-          VideoItemModel videoItemModel = videoService.uploadVideo(path, courseType, userId);
-          // Log.d("uploadVideoTest", String.valueOf(videoItemModel.getVideoId()));
+          int taskId = videoService.uploadVideo(path, courseType, userId);
+          Log.d("uploadVideoTest", String.valueOf(taskId));
+
         }
       }).start();
 

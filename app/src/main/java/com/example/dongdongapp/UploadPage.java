@@ -34,18 +34,26 @@ public class UploadPage extends AppCompatActivity {
         uploadVideo();
     }
     private void uploadVideo(){
+      Log.d("checkUploadUri", String.valueOf(videoUri));
       String videoPath = RealPathUtil.getRealPath(getApplicationContext(),videoUri);
       new Thread(new Runnable() {
         @Override
         public void run() {
-          videoService.uploadVideo(videoPath, courseType, userId);
+          int taskId = videoService.uploadVideo(videoPath, courseType, userId);
           runOnUiThread(new Runnable() {
             @Override
             public void run() {
-              Intent intent = new Intent(getApplicationContext(),AnalyzePage.class);
-              bundle.putBoolean("toFinish", false);
-              intent.putExtras(bundle);
-              startActivity(intent);
+              if (taskId == 0) {
+                Intent intent = new Intent(getApplicationContext(),UploadFailedPage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+              } else {
+                Intent intent = new Intent(getApplicationContext(),AnalyzePage.class);
+                bundle.putBoolean("toFinish", false);
+                intent.putExtras(bundle);
+                startActivity(intent);
+              }
+
             }
           });
         }
