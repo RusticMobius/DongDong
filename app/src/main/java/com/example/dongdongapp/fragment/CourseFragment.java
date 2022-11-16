@@ -18,6 +18,8 @@ import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.VideoRecordPage;
 
+// 课程详情页面
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CourseFragment#newInstance} factory method to
