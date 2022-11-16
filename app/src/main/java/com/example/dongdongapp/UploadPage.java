@@ -43,6 +43,7 @@ public class UploadPage extends AppCompatActivity {
             @Override
             public void run() {
               Intent intent = new Intent(getApplicationContext(),AnalyzePage.class);
+              bundle.putBoolean("toFinish", false);
               intent.putExtras(bundle);
               startActivity(intent);
             }

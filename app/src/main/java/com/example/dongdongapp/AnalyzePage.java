@@ -26,9 +26,13 @@ public class AnalyzePage extends AppCompatActivity {
       retButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+          if(bundle.getBoolean("toFinish", true)){
+            finish();
+          } else {
           Intent intent = new Intent(getApplicationContext(),CourseRecordPage.class);
           intent.putExtras(bundle);
           startActivity(intent);
+          }
         }
       });
     }

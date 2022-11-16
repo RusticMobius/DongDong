@@ -2,6 +2,7 @@ package com.example.dongdongapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -31,9 +32,32 @@ public class RecordViewPage extends AppCompatActivity {
         playButton = findViewById(R.id.playButton);
         rankTextView = findViewById(R.id.ratingTextView);
         adviceTextView = findViewById(R.id.recordAdvice);
+
+        initPageView(getIntent().getExtras());
         initButtonListener();
         initVideoView();
 
+    }
+
+    private void initPageView(Bundle bundle){
+      rankTextView.setText(bundle.getString("rank"));
+      adviceTextView.setText(bundle.getString("analysis"));
+      switch (bundle.getString("rank")){
+        case "A":
+        case "A+":
+          rankTextView.setTextColor(Color.parseColor("#25E4B8"));
+          break;
+        case "B":
+          rankTextView.setTextColor(Color.parseColor("#A363DC"));
+          break;
+        case "C":
+          rankTextView.setTextColor(Color.parseColor("#FFEB3B"));
+          break;
+        case "?":
+          rankTextView.setTextColor(Color.parseColor("#FFBB86FC"));
+        default:
+          break;
+      }
     }
 
     private void initButtonListener(){

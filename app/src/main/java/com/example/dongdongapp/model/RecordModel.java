@@ -90,6 +90,10 @@ public class RecordModel implements Comparable<RecordModel> {
     this.isAnalyzeFinish=status.equals("FINISH");
   }
 
+  public void setAnalyzeFinish(boolean analyzeFinish) {
+    isAnalyzeFinish = analyzeFinish;
+  }
+
   @Override
   public int compareTo(RecordModel o) {
     if(this.recordId > o.recordId){

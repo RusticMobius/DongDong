@@ -127,10 +127,13 @@ public class RecordFragment extends Fragment {
       int recordNum = 1 + random.nextInt(7);
 
       String [] ranks = {"A+", "A","B","C"};
+      boolean [] status = {true, false};
 
       for(int i = 0; i < recordNum; i++){
         RecordModel record  = new RecordModel();
         int rankIndex = random.nextInt(4);
+        int statusIndex = random.nextInt(2);
+        record.setAnalyzeFinish(status[statusIndex]);
         record.setRecordRank(ranks[rankIndex]);
         record.setRecordDate("2022.10.1"+String.valueOf(i));
         record.setRecordId(i);
