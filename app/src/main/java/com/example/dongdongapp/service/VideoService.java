@@ -39,7 +39,7 @@ public class VideoService {
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", file.getName(),requestBody)
+                .addFormDataPart("video", file.getName(),requestBody)
                 .addFormDataPart("type",type)
                 .addFormDataPart("uid",uid+"")
                 .build();
