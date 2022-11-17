@@ -96,6 +96,7 @@
     android:fontFamily="@font/numans"
     android:text="REDO"
     android:textColor="@color/white"
+    android:layout_marginTop="4dp"
     app:layout_constraintEnd_toEndOf="@+id/redoButton"
     app:layout_constraintStart_toStartOf="@+id/redoButton"
     app:layout_constraintTop_toBottomOf="@+id/redoButton" />
@@ -107,6 +108,7 @@
     android:fontFamily="@font/numans"
     android:textColor="@color/white"
     android:text="PLAY"
+    android:layout_marginTop="4dp"
     app:layout_constraintEnd_toEndOf="@+id/playButton"
     app:layout_constraintStart_toStartOf="@+id/playButton"
     app:layout_constraintTop_toBottomOf="@+id/playButton" />
@@ -118,6 +120,7 @@
     android:text="UPLOAD"
     android:fontFamily="@font/numans"
     android:textColor="@color/white"
+    android:layout_marginTop="4dp"
     app:layout_constraintEnd_toEndOf="@+id/uploadButton"
     app:layout_constraintStart_toStartOf="@+id/uploadButton"
     app:layout_constraintTop_toBottomOf="@+id/uploadButton" />
