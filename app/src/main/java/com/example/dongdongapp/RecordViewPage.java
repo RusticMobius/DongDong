@@ -109,5 +109,13 @@ public class RecordViewPage extends AppCompatActivity {
           });
         }
       });
+      vvVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+          if(! vvVideo.isPlaying()){
+            playButton.setImageResource(R.drawable.ic_baseline_pause_circle_outline_48);
+          }
+        }
+      });
     }
 }
