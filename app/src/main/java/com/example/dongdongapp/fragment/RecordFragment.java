@@ -53,7 +53,7 @@ public class RecordFragment extends Fragment {
     private int userId;
     private String courseType;
     private String courseName;
-
+    private TextView noneRecordTextView;
     private TextView guideText;
     private ImageButton retButton;
 
@@ -106,6 +106,7 @@ public class RecordFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_record, container, false);
 
         guideText = view.findViewById(R.id.recordGuideLine);
+        noneRecordTextView = view.findViewById(R.id.noneRecordPromptText);
         recordRecyclerView = view.findViewById(R.id.recordRecyclerView);
         retButton = view.findViewById(R.id.retButton);
 
@@ -122,8 +123,9 @@ public class RecordFragment extends Fragment {
         @Override
         public void onClick(View v) {
           // TODO
-          Intent intent = new Intent(getActivity(), MainActivity.class);
-          startActivity(intent);
+//          Intent intent = new Intent(getActivity(), MainActivity.class);
+//          startActivity(intent);
+          getActivity().finish();
         }
       });
     }
@@ -144,6 +146,9 @@ public class RecordFragment extends Fragment {
             @Override
             public void run() {
               recordAdapter.setRecordModelList(recordModelList);
+              if(recordModelList.size() == 0){
+                noneRecordTextView.setVisibility(View.VISIBLE);
+              }
               Log.d("getRecordListTest", String.valueOf(recordModelList.size()));
             }
           });

@@ -108,8 +108,9 @@ public class CourseFragment extends Fragment {
         @Override
         public void onClick(View v) {
           // TODO
-          Intent intent = new Intent(getActivity(), MainActivity.class);
-          startActivity(intent);
+          getActivity().finish();
+//          Intent intent = new Intent(getActivity(), MainActivity.class);
+//          startActivity(intent);
         }
       });
     }

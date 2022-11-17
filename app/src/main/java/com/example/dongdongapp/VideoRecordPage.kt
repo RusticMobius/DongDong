@@ -78,11 +78,14 @@ class VideoRecordPage : AppCompatActivity() {
         if (recording == null) {
           var t: Long = 5 * 1000 //定义总时长 5s
           viewBinding.recordButton.setImageResource(R.drawable.ic_baseline_circle_64)
+          viewBinding.recordButton.isEnabled = false;
           viewBinding.countDownTime.visibility = View.VISIBLE
           viewBinding.recordText.text = "COUNT DOWN"
           var countDownTimer = object : CountDownTimer(t, 1000) {
             override fun onFinish() {
               viewBinding.countDownTime.visibility = View.INVISIBLE
+              viewBinding.recordButton.isEnabled = true;
+              viewBinding.reverseButton.isEnabled = false;
               viewBinding.recordText.text = "STOP"
               viewBinding.recordButton.setImageResource(R.drawable.ic_baseline_pause_circle_64)
             }
@@ -106,18 +109,23 @@ class VideoRecordPage : AppCompatActivity() {
 
       }
       viewBinding.retButton.setOnClickListener { retToParentPage() }
-      viewBinding.reverseButton.setOnClickListener { selectCamera() }
+      viewBinding.reverseButton.setOnClickListener {
+        selectCamera()
+      }
       cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
 
   private fun retToParentPage(){
     //TODO
+    // recording?.stop()
+    cameraExecutor.shutdown()
     finish()
   }
 
   private fun selectCamera(){
     // TODO
+    recording?.stop()
     cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
       CameraSelector.DEFAULT_FRONT_CAMERA
     } else {
@@ -191,6 +199,7 @@ class VideoRecordPage : AppCompatActivity() {
               setImageResource(R.drawable.ic_baseline_pause_circle_64)
               isEnabled = true
             }
+            viewBinding.reverseButton.isEnabled = false
           }
           is VideoRecordEvent.Finalize -> {
             if (!recordEvent.hasError()) {
@@ -219,6 +228,8 @@ class VideoRecordPage : AppCompatActivity() {
               setImageResource(R.drawable.ic_round_play_circle_64)
               isEnabled = true
             }
+            viewBinding.recordText.text = "START"
+            viewBinding.reverseButton.isEnabled = true
           }
         }
       }

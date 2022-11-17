@@ -82,10 +82,12 @@ public class VideoPlayer extends AppCompatActivity {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
           // int duration = mediaPlayer.getDuration(); //total time
-          int position = mediaPlayer.getCurrentPosition();  //start time
-          currentTime.setText(calculateTime(position / 1000));
-          // totalTime.setText(calculateTime(duration / 1000));
-          startTimer();
+          if(mediaPlayer != null) {
+            int position = mediaPlayer.getCurrentPosition();  //start time
+            currentTime.setText(calculateTime(position / 1000));
+            // totalTime.setText(calculateTime(duration / 1000));
+            startTimer();
+          }
         }
 
         @Override
@@ -129,6 +131,7 @@ public class VideoPlayer extends AppCompatActivity {
       redoButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+          timer.cancel();
           retToRedo();
         }
       });
@@ -136,6 +139,7 @@ public class VideoPlayer extends AppCompatActivity {
       uploadButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+          timer.cancel();
           uploadVideo();
         }
       });
@@ -158,12 +162,18 @@ public class VideoPlayer extends AppCompatActivity {
 
     private void retToRedo(){
       //TODO
+      isSeekbarOnChange = false;
+      stopPlay();
+      mediaPlayer.release();
       mediaPlayer = null;
       finish();
     }
 
     private void uploadVideo(){
       //TODO
+      isSeekbarOnChange = false;
+      stopPlay();
+      mediaPlayer.release();
       mediaPlayer = null;
       Intent intent = new Intent(context, UploadPage.class);
       intent.putExtras(infoBundle);
