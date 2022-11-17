@@ -238,11 +238,13 @@ public class VideoService {
                 JSONObject object=(JSONObject) jsonArray.get(i);
                 RecordModel recordModel=new RecordModel();
                 recordModel.setRecordDate(parseRecordDate((String) object.get("createTime")));
-                recordModel.setRecordAdvice((String) object.get("advice"));
+                if (object.has("advice"))
+                    recordModel.setRecordAdvice((String) object.get("advice"));
                 recordModel.setCourseType((String) object.get("type"));
                 recordModel.setUserId((int) object.get("uid"));
                 recordModel.setRecordId((int) object.get("taskId"));
-                recordModel.setRank(parseScore((String) object.get("data")));
+                if(object.has("data"))
+                    recordModel.setRank(parseScore((String) object.get("data")));
                 recordModel.setVideoUrl((String) object.get("fileAddress"));
                 recordModel.setStatus((String) object.get("status"));
                 recordModelArrayList.add(recordModel);

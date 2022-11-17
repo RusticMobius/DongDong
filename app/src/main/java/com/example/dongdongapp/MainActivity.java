@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // UriConverterTest();
-        UploadPageTest();
+        //UploadPageTest();
 
 
         //TODO CONTROL LOG LOGICAL
