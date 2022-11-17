@@ -36,6 +36,7 @@ public class VideoPlayer extends AppCompatActivity {
     private Uri videoUri;
     private Context context;
     private Bundle infoBundle;
+    private TextView playTextView;
 
     private Timer timer;  //定时器
     private boolean isSeekbarOnChange; //互斥变量，防止进度条和定时器冲突。
@@ -54,6 +55,8 @@ public class VideoPlayer extends AppCompatActivity {
         seekBar = findViewById(R.id.seekBar);
         currentTime = findViewById(R.id.currentTime);
         totalTime = findViewById(R.id.totalTime);
+
+        playTextView = findViewById(R.id.playText);
 
         context = this.getApplicationContext();
 
@@ -142,10 +145,12 @@ public class VideoPlayer extends AppCompatActivity {
         public void onClick(View v) {
           if(mediaPlayer.isPlaying()){
             pausePlay();
-            playButton.setImageResource(R.drawable.ic_baseline_pause_circle_outline_48);
+            playButton.setImageResource(R.drawable.ic_baseline_pause_circle_64);
+            playTextView.setText("PAUSE");
           }else {
             startPlay();
-            playButton.setImageResource(R.drawable.ic_baseline_play_circle_48);
+            playButton.setImageResource(R.drawable.ic_round_play_circle_64);
+            playTextView.setText("PLAY");
           }
         }
       });
@@ -194,7 +199,7 @@ public class VideoPlayer extends AppCompatActivity {
         new MediaPlayer.OnCompletionListener() {
           @Override
           public void onCompletion(MediaPlayer mp) {
-            playButton.setImageResource(R.drawable.ic_baseline_pause_circle_outline_48);
+            playButton.setImageResource(R.drawable.ic_baseline_pause_circle_64);
           }
         }
       );

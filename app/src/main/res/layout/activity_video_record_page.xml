@@ -4,7 +4,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".VideoRecordPage">
+  tools:context=".VideoRecordPage"
+  android:background="@drawable/video_capture_background">
 
   <androidx.camera.view.PreviewView
     android:id="@+id/previewView"
@@ -24,51 +25,86 @@
 
   <ImageButton
     android:id="@+id/retButton"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:background="@color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_500"
     app:layout_constraintBottom_toBottomOf="@+id/recordButton"
     app:layout_constraintEnd_toStartOf="@+id/recordButton"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_32" />
+    app:srcCompat="@drawable/ic_round_arrow_circle_left_64" />
 
   <ImageButton
     android:id="@+id/recordButton"
     android:layout_width="64dp"
     android:layout_height="64dp"
-    android:layout_marginEnd="20dp"
     android:layout_marginStart="20dp"
-    android:layout_marginBottom="64dp"
-    android:background="@color/white"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="42dp"
+    android:background="@color/purple_500"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/reverseButton"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/retButton"
-    app:srcCompat="@drawable/ic_baseline_play_circle_48" />
+    app:srcCompat="@drawable/ic_round_play_circle_64" />
 
   <ImageButton
     android:id="@+id/reverseButton"
     android:layout_width="64dp"
     android:layout_height="64dp"
-    android:background="@color/white"
+    android:background="@color/purple_500"
     app:layout_constraintBottom_toBottomOf="@+id/recordButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/recordButton"
-    app:srcCompat="@drawable/ic_baseline_cameraswitch_48" />
+    app:srcCompat="@drawable/ic_baseline_change_circle_64" />
 
   <TextView
-    android:visibility="invisible"
     android:id="@+id/countDownTime"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:fontFamily="@font/nunito_bold"
     android:text="5"
-    android:textColor="#50D77C"
-    android:textSize="24dp"
-    android:layout_marginBottom="16dp"
-    android:layout_marginStart="25dp"
+    android:textColor="@color/purple_500"
+    android:textSize="32dp"
+    android:visibility="invisible"
     app:layout_constraintBottom_toBottomOf="@+id/recordButton"
-    app:layout_constraintStart_toStartOf="@+id/recordButton" />
+    app:layout_constraintStart_toStartOf="@+id/recordButton"
+    app:layout_constraintEnd_toEndOf="@id/recordButton"
+    app:layout_constraintTop_toTopOf="@id/recordButton"/>
+
+  <TextView
+    android:id="@+id/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/nunito_bold"
+    android:text="BACK"
+    android:textColor="@color/white"
+    app:layout_constraintEnd_toEndOf="@+id/retButton"
+    app:layout_constraintStart_toStartOf="@+id/retButton"
+    app:layout_constraintTop_toBottomOf="@+id/retButton" />
+
+  <TextView
+    android:id="@+id/recordText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="START"
+    android:fontFamily="@font/nunito_bold"
+    android:textColor="@color/white"
+    app:layout_constraintEnd_toEndOf="@+id/recordButton"
+    app:layout_constraintStart_toStartOf="@+id/recordButton"
+    app:layout_constraintTop_toBottomOf="@+id/recordButton" />
+
+  <TextView
+    android:id="@+id/switchText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="SWITCH"
+    android:fontFamily="@font/nunito_bold"
+    android:textColor="@color/white"
+    app:layout_constraintEnd_toEndOf="@+id/reverseButton"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="@+id/reverseButton"
+    app:layout_constraintTop_toBottomOf="@+id/reverseButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

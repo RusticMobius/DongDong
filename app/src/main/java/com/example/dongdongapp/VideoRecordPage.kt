@@ -77,12 +77,14 @@ class VideoRecordPage : AppCompatActivity() {
       viewBinding.recordButton.setOnClickListener {
         if (recording == null) {
           var t: Long = 5 * 1000 //定义总时长 5s
-          viewBinding.recordButton.setImageResource(R.drawable.ic_outline_circle_48)
+          viewBinding.recordButton.setImageResource(R.drawable.ic_baseline_circle_64)
           viewBinding.countDownTime.visibility = View.VISIBLE
+          viewBinding.recordText.text = "COUNT DOWN"
           var countDownTimer = object : CountDownTimer(t, 1000) {
             override fun onFinish() {
               viewBinding.countDownTime.visibility = View.INVISIBLE
-              viewBinding.recordButton.setImageResource(R.drawable.ic_baseline_pause_circle_outline_48)
+              viewBinding.recordText.text = "STOP"
+              viewBinding.recordButton.setImageResource(R.drawable.ic_baseline_pause_circle_64)
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -186,7 +188,7 @@ class VideoRecordPage : AppCompatActivity() {
         when(recordEvent) {
           is VideoRecordEvent.Start -> {
             viewBinding.recordButton.apply {
-              setImageResource(R.drawable.ic_baseline_pause_circle_outline_48)
+              setImageResource(R.drawable.ic_baseline_pause_circle_64)
               isEnabled = true
             }
           }
@@ -214,7 +216,7 @@ class VideoRecordPage : AppCompatActivity() {
                 "${recordEvent.error}")
             }
             viewBinding.recordButton.apply {
-              setImageResource(R.drawable.ic_baseline_play_circle_48)
+              setImageResource(R.drawable.ic_round_play_circle_64)
               isEnabled = true
             }
           }

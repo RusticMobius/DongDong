@@ -5,7 +5,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:keepScreenOn="true"
-  tools:context=".VideoPlayer">
+  tools:context=".VideoPlayer"
+  android:background="@drawable/video_capture_background">
 
   <SurfaceView
     android:id="@+id/videoSurfaceView"
@@ -26,35 +27,35 @@
     android:id="@+id/playButton"
     android:layout_width="56dp"
     android:layout_height="56dp"
-    android:layout_marginTop="48dp"
-    android:background="@color/white"
+    android:layout_marginTop="56dp"
+    android:background="@color/purple_500"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/videoSurfaceView"
-    app:srcCompat="@drawable/ic_baseline_play_circle_48" />
+    app:srcCompat="@drawable/ic_round_play_circle_64" />
 
   <ImageButton
     android:id="@+id/redoButton"
     android:layout_width="56dp"
     android:layout_height="56dp"
-    android:layout_marginTop="48dp"
+    android:layout_marginTop="56dp"
     android:layout_marginEnd="56dp"
-    android:background="@color/white"
+    android:background="@color/purple_500"
     app:layout_constraintEnd_toStartOf="@+id/playButton"
     app:layout_constraintTop_toBottomOf="@+id/videoSurfaceView"
-    app:srcCompat="@drawable/ic_baseline_refresh_48" />
+    app:srcCompat="@drawable/ic_baseline_replay_circle_filled_64" />
 
   <ImageButton
     android:id="@+id/uploadButton"
     android:layout_width="56dp"
     android:layout_height="56dp"
+    android:layout_marginStart="56dp"
+    android:layout_marginTop="56dp"
+    android:background="@color/purple_500"
     app:layout_constraintStart_toEndOf="@+id/playButton"
     app:layout_constraintTop_toBottomOf="@+id/videoSurfaceView"
-    android:layout_marginTop="48dp"
-    android:layout_marginStart="56dp"
-    android:background="@color/white"
-    app:srcCompat="@drawable/ic_baseline_check_48" />
+    app:srcCompat="@drawable/ic_baseline_check_circle_64" />
 
   <SeekBar
     android:id="@+id/seekBar"
@@ -87,5 +88,38 @@
     android:textSize="12dp"
     app:layout_constraintStart_toEndOf= "@+id/seekBar"
     app:layout_constraintTop_toBottomOf="@+id/videoSurfaceView" />
+
+  <TextView
+    android:id="@+id/redoText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/nunito_bold"
+    android:text="REDO"
+    android:textColor="@color/white"
+    app:layout_constraintEnd_toEndOf="@+id/redoButton"
+    app:layout_constraintStart_toStartOf="@+id/redoButton"
+    app:layout_constraintTop_toBottomOf="@+id/redoButton" />
+
+  <TextView
+    android:id="@+id/playText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/nunito_bold"
+    android:textColor="@color/white"
+    android:text="PLAY"
+    app:layout_constraintEnd_toEndOf="@+id/playButton"
+    app:layout_constraintStart_toStartOf="@+id/playButton"
+    app:layout_constraintTop_toBottomOf="@+id/playButton" />
+
+  <TextView
+    android:id="@+id/textView4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="UPLOAD"
+    android:fontFamily="@font/nunito_bold"
+    android:textColor="@color/white"
+    app:layout_constraintEnd_toEndOf="@+id/uploadButton"
+    app:layout_constraintStart_toStartOf="@+id/uploadButton"
+    app:layout_constraintTop_toBottomOf="@+id/uploadButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
