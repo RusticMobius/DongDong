@@ -4,21 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.dongdongapp.Adapter.ViewPageAdapter;
+import com.example.dongdongapp.model.RecordModel;
+import com.example.dongdongapp.service.VideoService;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
 
 // 课程详情页/用户训练记录页面 底部有tabbar
 public class CourseRecordPage extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
-    ViewPageAdapter viewPageAdapter;
+    private ViewPageAdapter viewPageAdapter;
     private int courseId;
     private int userId;
     private String allTips;
     private String courseName;
     private String courseType;
+    private List<RecordModel> recordModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,7 @@ public class CourseRecordPage extends AppCompatActivity {
 
         viewPageAdapter = new ViewPageAdapter(this);
         viewPager2.setAdapter(viewPageAdapter);
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
           @Override
@@ -92,4 +99,19 @@ public class CourseRecordPage extends AppCompatActivity {
       bundle.putString("courseTips",allTips);
       return bundle;
     }
+
+    public List<RecordModel> getRecordModelList(){
+      return recordModelList;
+    }
+
+//    private void loadRecordList(){
+//      VideoService videoService = new VideoService();
+//      new Thread(new Runnable() {
+//        @Override
+//        public void run() {
+//          recordModelList = videoService.getRecordByType(userId,courseType);
+//          Log.d("getRecordListTest", String.valueOf(recordModelList.size()));
+//        }
+//      }).start();
+//    }
 }

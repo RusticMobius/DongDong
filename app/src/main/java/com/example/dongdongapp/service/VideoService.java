@@ -9,12 +9,14 @@ import com.example.dongdongapp.model.VideoItemModel;
 import com.example.dongdongapp.util.DongFTPClient;
 import com.example.dongdongapp.util.DongHTTPClient;
 import com.google.gson.Gson;
+import com.google.gson.JsonNull;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -50,22 +52,25 @@ public class VideoService {
         String result=dongHTTPClient.doPost(backendUrl + "/upload",formBody);
         VideoItemModel videoItemModel=new VideoItemModel();
         videoItemModel.video=file;
+        int videoId = 0;
         try {
             JSONObject object=new JSONObject(result);
-            videoItemModel.videoId=(int) object.get("videoId");
-            videoItemModel.videoAddress=(String) object.get("videoAddress");
-            videoItemModel.coverAddress=(String) object.get("coverAddress");
-            videoItemModel.createTime=(String) object.get("createTime");
-            videoItemModel.isAnalysis=(String) object.get("isAnalysis");
-            videoItemModel.taskId=(int) object.get("taskId");
-            videoItemModel.type=(String) object.get("type");
-            videoItemModel.uid=(int) object.get("uid");
-            videoItemModel.uuid=(String) object.get("uuid");
-            Log.d("uploadVideoTest",(String) object.get("status"));
+            JSONObject data = (JSONObject) object.get("data");
+            videoId = (int) data.getInt("videoId");
+//            videoItemModel.videoId=(int) object.get("videoId");
+//            videoItemModel.videoAddress=(String) object.get("videoAddress");
+//            videoItemModel.coverAddress=(String) object.get("coverAddress");
+//            videoItemModel.createTime=(String) object.get("createTime");
+//            videoItemModel.isAnalysis=(String) object.get("isAnalysis");
+//            videoItemModel.taskId=(int) object.get("taskId");
+//            videoItemModel.type=(String) object.get("type");
+//            videoItemModel.uid=(int) object.get("uid");
+//            videoItemModel.uuid=(String) object.get("uuid");
+//            Log.d("uploadVideoTest",(String) object.get("status"));
         }catch (Exception e){
             e.printStackTrace();
         }
-        return videoItemModel.taskId;
+        return videoId;
     }
 
     /**
@@ -227,8 +232,8 @@ public class VideoService {
      * @param type 运动类型
      * @return 运动记录列表
      */
-    public ArrayList<RecordModel> getRecordByType(int uid,String type){
-        ArrayList<RecordModel> recordModelArrayList=new ArrayList<>();
+    public List<RecordModel> getRecordByType(int uid, String type){
+        List<RecordModel> recordModelArrayList = new ArrayList<>();
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
         String res=dongHTTPClient.doGet(backendUrl+"/getVideoByType/"+uid+"/"+type);
         try {
@@ -237,16 +242,26 @@ public class VideoService {
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject object=(JSONObject) jsonArray.get(i);
                 RecordModel recordModel=new RecordModel();
-                recordModel.setRecordDate(parseRecordDate((String) object.get("createTime")));
-                if (object.has("advice"))
-                    recordModel.setRecordAdvice((String) object.get("advice"));
-                recordModel.setCourseType((String) object.get("type"));
+                recordModel.setRecordDate(parseRecordDate( object.getString("createTime")));
+                recordModel.setRecordAdvice(
+                  object.get("advice") != null ? object.getString("advice"): null
+                );
+                recordModel.setCourseType(
+                  object.get("type") != null ? object.getString("type"): null
+                );
                 recordModel.setUserId((int) object.get("uid"));
-                recordModel.setRecordId((int) object.get("taskId"));
-                if(object.has("data"))
-                    recordModel.setRank(parseScore((String) object.get("data")));
-                recordModel.setVideoUrl((String) object.get("fileAddress"));
-                recordModel.setStatus((String) object.get("status"));
+                recordModel.setRecordId(
+                  object.get("videoId") != null ? object.getInt("videoId"): -1
+                );
+                recordModel.setRank(
+                  object.get("data") != null ? parseScore(object.getString("data")) : null
+                );
+                recordModel.setVideoUrl(
+                  object.get("fileAddress") != null ? object.getString("fileAddress") : null
+                );
+                recordModel.setStatus(
+                  object.get("status") != null ? object.getString("status") : null
+                );
                 recordModelArrayList.add(recordModel);
             }
         }catch (Exception e){
@@ -267,13 +282,17 @@ public class VideoService {
 
     private int parseScore(String dataStr){
         //TODO:将data内的内容转化为分数（逻辑待验证）
-        String dataContent=dataStr
-                .replace("[","")
-                .replace("]","")
-                .replace("{","")
-                .replace("}","");
-        String scoreContent=dataContent.split(",")[0];
-        return Integer.parseInt(scoreContent.split("=")[1]);
+        if(dataStr.contains("[")) {
+          String dataContent = dataStr
+            .replace("[", "")
+            .replace("]", "")
+            .replace("{", "")
+            .replace("}", "");
+          String scoreContent = dataContent.split(",")[0];
+          return Integer.parseInt(scoreContent.split("=")[1]);
+        }else{
+          return 0;
+        }
     }
 
 }

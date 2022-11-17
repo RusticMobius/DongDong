@@ -2,7 +2,7 @@ package com.example.dongdongapp.config;
 
 public class dongdongappConfiguration {
     public static final String openposeUrl="";//Openpose AI端的url
-    public static final String backendUrl="http://springboot.dongdong-backend-6441.devcloud.seec.seecoder.cn/api";//后端url
+    public static final String backendUrl="http://101.43.238.126:6767/api";//后端url
 
 
     public static final String ftpHost="101.43.238.126";//ftp port ip

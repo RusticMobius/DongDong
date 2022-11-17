@@ -87,7 +87,11 @@ public class RecordModel implements Comparable<RecordModel> {
   }
 
   public void setStatus(String status){
-    this.isAnalyzeFinish=status.equals("FINISH");
+    if(status != null){
+      this.isAnalyzeFinish=status.equals("FINISH");
+    } else {
+      this.isAnalyzeFinish = false;
+    }
   }
 
   public void setAnalyzeFinish(boolean analyzeFinish) {

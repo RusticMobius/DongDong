@@ -39,17 +39,18 @@ public class UploadPage extends AppCompatActivity {
       new Thread(new Runnable() {
         @Override
         public void run() {
-          int taskId = videoService.uploadVideo(videoPath, courseType, userId);
+          int videoId = videoService.uploadVideo(videoPath, courseType, userId);
           runOnUiThread(new Runnable() {
             @Override
             public void run() {
-              if (taskId == 0) {
+              if (videoId == 0) {
                 Intent intent = new Intent(getApplicationContext(),UploadFailedPage.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
               } else {
                 Intent intent = new Intent(getApplicationContext(),AnalyzePage.class);
                 bundle.putBoolean("toFinish", false);
+                bundle.putInt("videoId", videoId);
                 intent.putExtras(bundle);
                 startActivity(intent);
               }

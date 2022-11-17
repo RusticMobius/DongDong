@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.dongdongapp.service.TaskService;
+
 public class AnalyzePage extends AppCompatActivity {
 
     private ImageButton retButton;
@@ -20,6 +22,9 @@ public class AnalyzePage extends AppCompatActivity {
         retButton = findViewById(R.id.retButton);
         bundle = getIntent().getExtras();
         initButtonListener();
+        if(! bundle.getBoolean("toFinish")){
+          invokeAnalyze();
+        }
 
     }
     private void initButtonListener(){
@@ -37,5 +42,15 @@ public class AnalyzePage extends AppCompatActivity {
       });
     }
 
+    private void invokeAnalyze(){
+      int videoId = bundle.getInt("videoId");
+      TaskService taskService = new TaskService();
+      new Thread(new Runnable() {
+        @Override
+        public void run() {
+          taskService.analyseVideo(videoId);
+        }
+      }).start();
+    }
 
 }

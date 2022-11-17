@@ -79,6 +79,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
           Intent intent = new Intent(context, RecordViewPage.class);
           bundle.putString("rank",item.getRecordRank());
           bundle.putString("analysis",item.getRecordAdvice());
+          bundle.putString("videoUrl",item.getVideoUrl());
           intent.putExtras(bundle);
           context.startActivity(intent);
         }

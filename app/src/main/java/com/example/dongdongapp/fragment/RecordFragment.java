@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.airbnb.lottie.L;
 import com.example.dongdongapp.Adapter.RecordAdapter;
+import com.example.dongdongapp.CourseRecordPage;
 import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.model.RecordModel;
@@ -88,10 +91,12 @@ public class RecordFragment extends Fragment {
               courseName = getArguments().getString("courseName");
               courseType = getArguments().getString("courseType");
         }
-        // recordModelList = new ArrayList<RecordModel>();
-        recordModelList = setRecordModelList();
+        recordModelList = new ArrayList<RecordModel>();
+        // recordModelList = setRecordModelList();
+
         recordAdapter = new RecordAdapter(getContext(),getArguments());
         recordAdapter.setRecordModelList(recordModelList);
+        getRecordModelList();
     }
 
     @Override
@@ -124,35 +129,51 @@ public class RecordFragment extends Fragment {
     }
 
 
-    private List<RecordModel> setRecordModelList(){
+    private void getRecordModelList(){
       // TODO implement a method to get user record list in THIS COURSE
 
+      VideoService videoService = new VideoService();
+      Log.d("RecordFragment","getting record list");
+      new Thread(new Runnable() {
+        @Override
+        public void run() {
+          recordModelList = videoService.getRecordByType(userId,courseType);
+          Collections.sort(recordModelList);
+          Log.d("RecordFragment", String.valueOf(recordModelList.size()));
+          getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              recordAdapter.setRecordModelList(recordModelList);
+              Log.d("getRecordListTest", String.valueOf(recordModelList.size()));
+            }
+          });
+        }
+      }).start();
 
-      List<RecordModel> recordModelList = new ArrayList<>();
 
 //      VideoService videoService = new VideoService();
 //      recordModelList = videoService.getRecordByType(userId, courseType);
 
       // fake implement
-      Random random = new Random();
-      int recordNum = 1 + random.nextInt(7);
-
-      String [] ranks = {"A+", "A","B","C"};
-      boolean [] status = {true, false};
-
-      for(int i = 0; i < recordNum; i++){
-        RecordModel record  = new RecordModel();
-        int rankIndex = random.nextInt(4);
-        int statusIndex = random.nextInt(2);
-        record.setAnalyzeFinish(status[statusIndex]);
-        record.setRecordRank(ranks[rankIndex]);
-        record.setRecordDate("2022.10.1"+String.valueOf(i));
-        record.setRecordId(i);
-        record.setRecordAdvice("A piece of Advice for record" + i + " in " + courseName);
-
-        recordModelList.add(record);
-      }
-      Collections.sort(recordModelList);
-      return recordModelList;
+//      Random random = new Random();
+//      int recordNum = 1 + random.nextInt(7);
+//
+//      String [] ranks = {"A+", "A","B","C"};
+//      boolean [] status = {true, false};
+//
+//      for(int i = 0; i < recordNum; i++){
+//        RecordModel record  = new RecordModel();
+//        int rankIndex = random.nextInt(4);
+//        int statusIndex = random.nextInt(2);
+//        record.setAnalyzeFinish(status[statusIndex]);
+//        record.setRecordRank(ranks[rankIndex]);
+//        record.setRecordDate("2022.10.1"+String.valueOf(i));
+//        record.setRecordId(i);
+//        record.setRecordAdvice("A piece of Advice for record" + i + " in " + courseName);
+//
+//        recordModelList.add(record);
+//      }
+//      Collections.sort(recordModelList);
+//      return recordModelList;
     }
 }

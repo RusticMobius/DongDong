@@ -16,9 +16,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
+import com.airbnb.lottie.L;
 import com.example.dongdongapp.Adapter.CourseAdapter;
 import com.example.dongdongapp.model.CourseModel;
+import com.example.dongdongapp.model.RecordModel;
 import com.example.dongdongapp.model.VideoItemModel;
+import com.example.dongdongapp.service.TaskService;
 import com.example.dongdongapp.service.VideoService;
 import com.example.dongdongapp.util.RealPathUtil;
 
@@ -62,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // UriConverterTest();
-        //UploadPageTest();
+        // UploadPageTest();
+        getRecordListTest();
+        // invokeAnalyze();
 
 
         //TODO CONTROL LOG LOGICAL
@@ -142,11 +147,37 @@ public class MainActivity extends AppCompatActivity {
       new Thread(new Runnable() {
         @Override
         public void run() {
-          int taskId = videoService.uploadVideo(path, courseType, userId);
-          Log.d("uploadVideoTest", String.valueOf(taskId));
+          int videoId = videoService.uploadVideo(path, courseType, userId);
+          Log.d("uploadVideoTest", String.valueOf(videoId));
 
         }
       }).start();
 
     }
+
+    private void getRecordListTest(){
+      String courseType = "VIDEO_SQUAT";
+      VideoService videoService = new VideoService();
+      new Thread(new Runnable() {
+        @Override
+        public void run() {
+          List<RecordModel> recordModelList = videoService.getRecordByType(userId,courseType);
+          Log.d("getRecordListTest", String.valueOf(recordModelList.size()));
+          Log.d("RecordFragment", String.valueOf(recordModelList.size()));
+
+        }
+      }).start();
+    }
+
+  private void invokeAnalyze(){
+    int videoId = 25 ;
+    TaskService taskService = new TaskService();
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        boolean result = taskService.analyseVideo(videoId);
+        Log.d("analyzeTest", String.valueOf(result));
+      }
+    }).start();
+  }
 }
