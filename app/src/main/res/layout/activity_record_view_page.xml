@@ -101,21 +101,37 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:background="@color/none_select_state"
-      app:srcCompat="@drawable/ic_baseline_play_circle_outline_blue_48" />
+      app:srcCompat="@drawable/ic_baseline_pause_circle_outline_48" />
 
   </LinearLayout>
 
-  <TextView
+<!--  <TextView-->
+<!--    android:id="@+id/loadInfoText"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="LOADING..."-->
+<!--    android:textSize="36dp"-->
+<!--    android:textAlignment="center"-->
+<!--    android:textColor="#A3FFFFFF"-->
+<!--    app:layout_constraintBottom_toBottomOf="@+id/recordVideoView"-->
+<!--    app:layout_constraintEnd_toEndOf="@+id/recordVideoView"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="@+id/recordVideoView" />-->
+
+  <com.airbnb.lottie.LottieAnimationView
     android:id="@+id/loadInfoText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="LOADING..."
-    android:textSize="36dp"
-    android:textColor="#A3FFFFFF"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_gravity="center_horizontal|center_vertical"
     app:layout_constraintBottom_toBottomOf="@+id/recordVideoView"
-    app:layout_constraintEnd_toEndOf="@+id/recordVideoView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/recordVideoView" />
+    app:layout_constraintTop_toTopOf="@+id/recordVideoView"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"
+    app:lottie_rawRes="@raw/loading"
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.net.URI;
 
 // 分析详情页
@@ -22,7 +24,7 @@ public class RecordViewPage extends AppCompatActivity {
     private ImageButton playButton;
     private TextView rankTextView;
     private TextView adviceTextView;
-    private TextView loadingTextView;
+    private LottieAnimationView loadingTextView;
     // TODO
     // private String videoPath = "https://vd2.bdstatic.com/mda-mafn1sffpj7cjnrw/v1-cae/sc/mda-mafn1sffpj7cjnrw.mp4?v_from_s=hkapp-haokan-suzhou&auth_key=1668529191-0-0-0e03b9468bc10c255c665fea1544172c&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=2990968645&vid=10737651655157153533&abtest=104959_2-105568_2&klogid=2990968645";
     private String videoPath;
@@ -100,6 +102,7 @@ public class RecordViewPage extends AppCompatActivity {
             public boolean onInfo(MediaPlayer mp, int what, int extra) {
               if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
                 loadingTextView.setVisibility(View.INVISIBLE);
+                playButton.setImageResource(R.drawable.ic_baseline_play_circle_outline_blue_48);
               }
               return true;
             }
