@@ -35,6 +35,7 @@ public class AnalyzePage extends AppCompatActivity {
             finish();
           } else {
           Intent intent = new Intent(getApplicationContext(),CourseRecordPage.class);
+          bundle.putBoolean("toFinish", false);
           intent.putExtras(bundle);
           startActivity(intent);
           }

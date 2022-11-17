@@ -68,6 +68,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         bundle.putString("courseName", item.getCourseName());
         bundle.putString("courseTips", item.getTips());
         bundle.putString("courseType", item.getCourseType());
+        bundle.putBoolean("toFinish",true);
         Intent intent = new Intent((Activity)context, CourseRecordPage.class);
         intent.putExtras(bundle);
         context.startActivity(intent);

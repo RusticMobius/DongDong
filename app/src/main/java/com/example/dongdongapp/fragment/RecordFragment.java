@@ -57,6 +57,8 @@ public class RecordFragment extends Fragment {
     private TextView guideText;
     private ImageButton retButton;
 
+    private boolean toFinish = true;
+
 
     public RecordFragment() {
         // Required empty public constructor
@@ -90,6 +92,7 @@ public class RecordFragment extends Fragment {
               userId = getArguments().getInt("userId");
               courseName = getArguments().getString("courseName");
               courseType = getArguments().getString("courseType");
+              toFinish = getArguments().getBoolean("toFinish");
         }
         recordModelList = new ArrayList<RecordModel>();
         // recordModelList = setRecordModelList();
@@ -123,9 +126,12 @@ public class RecordFragment extends Fragment {
         @Override
         public void onClick(View v) {
           // TODO
-//          Intent intent = new Intent(getActivity(), MainActivity.class);
-//          startActivity(intent);
-          getActivity().finish();
+          if(toFinish) {
+            getActivity().finish();
+          }else {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+          }
         }
       });
     }

@@ -42,7 +42,7 @@ public class CourseFragment extends Fragment {
     private Button recordButton;
     private String TAG = "courseFragment";
     private Bundle recordActivityBundle;
-
+    private boolean toFinish;
     public CourseFragment() {
         // Required empty public constructor
     }
@@ -74,6 +74,7 @@ public class CourseFragment extends Fragment {
             allTips = getArguments().getString("courseTips");
             courseId = getArguments().getInt("courseId");
           userId = getArguments().getInt("userId");
+          toFinish = getArguments().getBoolean("toFinish");
         }
     }
 
@@ -108,9 +109,12 @@ public class CourseFragment extends Fragment {
         @Override
         public void onClick(View v) {
           // TODO
-          getActivity().finish();
-//          Intent intent = new Intent(getActivity(), MainActivity.class);
-//          startActivity(intent);
+          if(toFinish) {
+            getActivity().finish();
+          } else {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+          }
         }
       });
     }

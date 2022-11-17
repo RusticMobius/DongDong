@@ -24,6 +24,7 @@ public class CourseRecordPage extends AppCompatActivity {
     private String allTips;
     private String courseName;
     private String courseType;
+    private boolean toFinish;
     private List<RecordModel> recordModelList;
 
     @Override
@@ -37,6 +38,7 @@ public class CourseRecordPage extends AppCompatActivity {
         courseName = bundle.getString("courseName");
         allTips = bundle.getString("courseTips");
         courseType = bundle.getString("courseType");
+        toFinish = bundle.getBoolean("toFinish");
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPage);
@@ -87,6 +89,7 @@ public class CourseRecordPage extends AppCompatActivity {
       bundle.putString("courseTips",allTips);
       bundle.putInt("userId",userId);
       bundle.putString("courseType",courseType);
+      bundle.putBoolean("toFinish",toFinish);
       return bundle;
     }
 
@@ -97,6 +100,7 @@ public class CourseRecordPage extends AppCompatActivity {
       bundle.putString("courseName",courseName);
       bundle.putString("courseType",courseType);
       bundle.putString("courseTips",allTips);
+      bundle.putBoolean("toFinish",toFinish);
       return bundle;
     }
 
