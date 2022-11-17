@@ -21,7 +21,7 @@ public class TaskService {
     @Deprecated
     public OpenposeResultModel getResult(String uuid){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String resultJsonStr=dongHTTPClient.doGet(openposeUrl+"/v1/result/{"+uuid+"}");
+        String resultJsonStr=dongHTTPClient.doGet(openposeUrl+"/v1/result/"+uuid);
         Gson gson=new Gson();
         OpenposeResultModel openposeResult=new OpenposeResultModel();
         try {
@@ -48,7 +48,7 @@ public class TaskService {
      */
     public AnalyseResultModel getAnalyseResult(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String result=dongHTTPClient.doGet(backendUrl+"/get/{"+videoId+"}");
+        String result=dongHTTPClient.doGet(backendUrl+"/get/"+videoId);
         AnalyseResultModel resultModel=new AnalyseResultModel();
         try{
             JSONObject jsonObject=new JSONObject(result);
@@ -72,7 +72,7 @@ public class TaskService {
      */
     public String analyseVideoData(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String result=dongHTTPClient.doGet(backendUrl+"/analysis/{"+videoId+"}");
+        String result=dongHTTPClient.doGet(backendUrl+"/analysis/"+videoId);
         return result;
     }
 

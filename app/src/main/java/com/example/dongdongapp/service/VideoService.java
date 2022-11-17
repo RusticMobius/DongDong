@@ -79,13 +79,13 @@ public class VideoService {
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", file.getName(),requestBody)
+                .addFormDataPart("video", file.getName(),requestBody)
                 .addFormDataPart("type",type)
                 .addFormDataPart("uid",uid+"")
                 .build();
 
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String result=dongHTTPClient.doPost(backendUrl,formBody);
+        String result=dongHTTPClient.doPost(backendUrl+"/upload",formBody);
         VideoItemModel videoItemModel=new VideoItemModel();
         videoItemModel.video=file;
         try {
@@ -125,7 +125,7 @@ public class VideoService {
      */
     public ArrayList<VideoItemModel> getVideoList(int uid){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String res=dongHTTPClient.doGet(backendUrl+"/getVideos/{"+uid+"}");
+        String res=dongHTTPClient.doGet(backendUrl+"/getVideos/"+uid);
         Gson gson=new Gson();
         ArrayList<VideoItemModel> videoList=new ArrayList<>();
         try {
@@ -158,7 +158,7 @@ public class VideoService {
      */
     public VideoItemModel getVideoById(int videoId){
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String res=dongHTTPClient.doGet(backendUrl+"/getVideo/{"+videoId+"}");
+        String res=dongHTTPClient.doGet(backendUrl+"/getVideo/"+videoId);
         VideoItemModel videoItemModel=new VideoItemModel();
         try {
             JSONObject object=new JSONObject(res);
@@ -230,7 +230,7 @@ public class VideoService {
     public ArrayList<RecordModel> getRecordByType(int uid,String type){
         ArrayList<RecordModel> recordModelArrayList=new ArrayList<>();
         DongHTTPClient dongHTTPClient=new DongHTTPClient();
-        String res=dongHTTPClient.doGet(backendUrl+"/getVideoByType/{"+uid+"}/{"+type+"}");
+        String res=dongHTTPClient.doGet(backendUrl+"/getVideoByType/"+uid+"/"+type);
         try {
             JSONObject jsonObject=new JSONObject(res);
             JSONArray jsonArray=(JSONArray) jsonObject.get("data");
