@@ -17,6 +17,7 @@ import com.example.dongdongapp.CoursePage;
 import com.example.dongdongapp.MainActivity;
 import com.example.dongdongapp.R;
 import com.example.dongdongapp.VideoRecordPage;
+import com.example.dongdongapp.util.PermissionUtils;
 
 // 课程详情页面
 

@@ -1,41 +1,32 @@
 package com.example.dongdongapp
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.Manifest
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.provider.MediaStore
-import androidx.camera.core.ImageCapture
-import androidx.camera.video.Recorder
-import androidx.camera.video.Recording
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.*
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.video.*
 import androidx.camera.video.VideoCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import android.widget.Toast
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.core.Preview
-import androidx.camera.core.CameraSelector
-import android.util.Log
-import android.view.View
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.video.MediaStoreOutputOptions
-import androidx.camera.video.Quality
-import androidx.camera.video.QualitySelector
-import androidx.camera.video.VideoRecordEvent
 import androidx.core.content.PermissionChecker
 import com.example.dongdongapp.databinding.ActivityVideoRecordPageBinding
+import com.example.dongdongapp.util.PermissionUtils
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 typealias LumaListener = (luma: Double) -> Unit
 
@@ -62,7 +53,7 @@ class VideoRecordPage : AppCompatActivity() {
         setContentView(viewBinding.root)
 
       infoBundle = this.intent.extras;
-
+      PermissionUtils.verifyStoragePermissions(this)
 
       // Request camera permissions
       if (allPermissionsGranted()) {
@@ -303,6 +294,7 @@ class VideoRecordPage : AppCompatActivity() {
       ).apply {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
           add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+          add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
       }.toTypedArray()
   }

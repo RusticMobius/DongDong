@@ -36,6 +36,9 @@ public class UploadPage extends AppCompatActivity {
     private void uploadVideo(){
       Log.d("checkUploadUri", String.valueOf(videoUri));
       String videoPath = RealPathUtil.getRealPath(getApplicationContext(),videoUri);
+      // mock
+      // String videoPath = "/storage/emulated/0/Movies/CameraX-Video/highKnees.mp4";
+      Log.d("filePath",videoPath);
       new Thread(new Runnable() {
         @Override
         public void run() {

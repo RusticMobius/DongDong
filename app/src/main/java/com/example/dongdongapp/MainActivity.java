@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.StringPrepParseException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.example.dongdongapp.model.RecordModel;
 import com.example.dongdongapp.model.VideoItemModel;
 import com.example.dongdongapp.service.TaskService;
 import com.example.dongdongapp.service.VideoService;
+import com.example.dongdongapp.util.PermissionUtils;
 import com.example.dongdongapp.util.RealPathUtil;
 
 import java.util.List;
@@ -65,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // UriConverterTest();
-        // UploadPageTest();
-        getRecordListTest();
+        UploadPageTest();
+        // getRecordListTest();
         // invokeAnalyze();
 
 
@@ -140,8 +142,11 @@ public class MainActivity extends AppCompatActivity {
 //      Bundle bundle = new Bundle();
 //      Intent intent = new Intent(context,AnalyzePage.class);
 //      startActivity(intent);
-      Uri uri = Uri.parse("content://media/external/video/media/1000000046");
-      String path = RealPathUtil.getRealPath(context,uri);
+      PermissionUtils.verifyStoragePermissions(this);
+      Log.d("uploadVideoTest","Running");
+      // Uri uri = Uri.parse("content://media/external/video/media/1000000046");
+      String path =  "/storage/emulated/0/Movies/CameraX-Video/highKnees.mp4";
+      // String path = RealPathUtil.getRealPath(context,uri);
       String courseType = "VIDEO_HIGHKNEES";
       VideoService videoService = new VideoService();
       new Thread(new Runnable() {

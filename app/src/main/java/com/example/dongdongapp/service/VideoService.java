@@ -32,14 +32,15 @@ public class VideoService {
 
     /**
      * 上传拍摄的运动视频
-     * @param fileName 文件名
+     * @param filePath 文件路径
      * @param type 运动类型
      * @param uid 用户id
      * @return 视频信息（详见VideoItemModel或参考后端接口文档）
      */
-    public int uploadVideo(String fileName,String type,int uid){
+    public int uploadVideo(String filePath,String type,int uid){
         // File file=new File(localVideoPath+"/"+fileName);
-        File file = new File(fileName);
+
+        File file = new File(filePath);
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -69,6 +70,7 @@ public class VideoService {
 //            Log.d("uploadVideoTest",(String) object.get("status"));
         }catch (Exception e){
             e.printStackTrace();
+            Log.d("uploadServiceError", String.valueOf(e));
         }
         return videoId;
     }
