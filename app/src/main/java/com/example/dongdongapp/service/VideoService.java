@@ -39,7 +39,8 @@ public class VideoService {
      */
     public int uploadVideo(String filePath,String type,int uid){
         // File file=new File(localVideoPath+"/"+fileName);
-
+        // mock
+        // filePath = "/storage/emulated/0/Movies/CameraX-Video/longjump.mp4";
         File file = new File(filePath);
         RequestBody requestBody=RequestBody.create(MediaType.parse("video/*"),file);
         MultipartBody formBody=new MultipartBody.Builder()
@@ -72,6 +73,7 @@ public class VideoService {
             e.printStackTrace();
             Log.d("uploadServiceError", String.valueOf(e));
         }
+        Log.d("uploadService", String.valueOf(videoId));
         return videoId;
     }
 
