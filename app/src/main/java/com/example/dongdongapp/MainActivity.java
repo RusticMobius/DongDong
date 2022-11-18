@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // UriConverterTest();
-        UploadPageTest();
+        // UploadPageTest();
         // getRecordListTest();
         // invokeAnalyze();
 
